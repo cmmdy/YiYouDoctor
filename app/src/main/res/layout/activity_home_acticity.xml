@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.4"
+        android:background="#375de4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent='true'
+            android:layout_gravity='center'
+            android:text="首页"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/message"
+            android:layout_width="30dp"
+            android:layout_height="27dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/message" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5.9"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+            <FrameLayout
+                android:id="@+id/point_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center|bottom"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.5"
+                    android:background="@drawable/viewpager5">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/viewGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+    </FrameLayout>
+
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="15">
+
+    </ListView>
+
+</LinearLayout>
