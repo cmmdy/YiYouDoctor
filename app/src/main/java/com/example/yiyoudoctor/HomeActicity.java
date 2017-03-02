@@ -1,5 +1,7 @@
 package com.example.yiyoudoctor;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -21,8 +24,10 @@ public class HomeActicity extends AppCompatActivity implements ViewPager.OnPageC
 
     private double WIDTH;
     private double HEIGHT;
-
     private Toolbar toolbar;
+
+    private static final int SCROLL_WHAT = 0;
+    private static final long DELAY_TIME = 5000;
 
 
     /**
@@ -46,6 +51,7 @@ public class HomeActicity extends AppCompatActivity implements ViewPager.OnPageC
     private int[] imgIdArray ;
 
     private boolean isLooper;
+    private boolean ifStop = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +112,7 @@ public class HomeActicity extends AppCompatActivity implements ViewPager.OnPageC
         //设置ViewPager的默认项, 设置为长度的100倍，这样子开始就能往左滑动
         viewPager.setCurrentItem((mImageViews.length) * 100);
 
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -117,25 +124,48 @@ public class HomeActicity extends AppCompatActivity implements ViewPager.OnPageC
                         e.printStackTrace();
                     }
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //这里是设置当前页的下一页
-                            viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                        }
-                    });
+                    if (!ifStop) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //这里是设置当前页的下一页
+                                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                            }
+                        });
+                    }
                 }
             }
         }).start();
 
-//        viewPager.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                isLooper = false;
-//            }
-//        });
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        ifStop = true;
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        ifStop = false;
+                        break;
+                }
+                return false;
+            }
+        });
 
     }
+
+//    Handler handler = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            int Page = viewPager.getCurrentItem();
+//            int toPage = (++Page) % mImageViews.length;
+//            viewPager.setCurrentItem(toPage);
+//            handler.removeMessages(SCROLL_WHAT);
+//            handler.sendEmptyMessageDelayed(SCROLL_WHAT, DELAY_TIME);
+//        }
+//    };
+
+//
 
     //创建菜单
     @Override
