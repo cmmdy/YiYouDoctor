@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <android.support.v7.widget.Toolbar
         android:paddingTop="24dp"
@@ -31,20 +32,11 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <fragment
-        android:id="@+id/first_fragment"
-        android:name="com.example.yiyoudoctor.ui.HomeFragment"
+    <FrameLayout
+        android:id="@+id/realtabcontent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="21"
-        android:orientation="vertical">
-
-    </fragment>
-
-    <FrameLayout
-        android:id="@+id/flContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_weight="25">
     </FrameLayout>
 
     <FrameLayout
@@ -54,12 +46,17 @@
     </FrameLayout>
 
     <android.support.v4.app.FragmentTabHost
-        android:id="@+id/tabhost"
+        android:id="@android:id/tabhost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
         android:layout_gravity="center_horizontal"
         android:alpha="1">
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0" />
 
     </android.support.v4.app.FragmentTabHost>
 

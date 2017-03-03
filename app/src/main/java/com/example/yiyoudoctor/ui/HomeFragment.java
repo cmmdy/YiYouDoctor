@@ -162,7 +162,7 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
 
         initffts();
         HFTextAdapter FFTAdapter = new HFTextAdapter
-                (getActivity(), R.layout.firstfragmenttext_item, fftList);
+                (getActivity(), R.layout.hftext_item, fftList);
         ListView listView = (ListView) view.findViewById(R.id.fftListView);
 
 
@@ -208,18 +208,18 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     }
 
     @Override
-    public void onPageScrollStateChanged(int arg0) {
-
-    }
-
-    @Override
-    public void onPageScrolled(int arg0, float arg1, int arg2) {
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
     }
 
     @Override
     public void onPageSelected(int arg0) {
         setImageBackground(arg0 % mImageViews.length);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     /**
@@ -234,14 +234,6 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
                 tips[i].setBackgroundResource(R.drawable.bullet_white);
             }
         }
-    }
-
-    public double getHEIGHT() {
-        return HEIGHT;
-    }
-
-    public double getWIDTH() {
-        return WIDTH;
     }
 
     //初始化ListView
