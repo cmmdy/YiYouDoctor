@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:layout_margin="5dp"
+    >
 
 
     <ImageView
         android:id="@+id/order_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:scaleType="centerCrop"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="15dp"/>
 
     <TextView
         android:id="@+id/patientName"
@@ -20,6 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/order_image"
+        android:layout_marginTop="10dp"
+        android:textSize="17sp"
         android:text="TextView" />
 
     <TextView
@@ -28,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/patientName"
         android:layout_toEndOf="@+id/order_image"
+        android:textSize="13sp"
         android:text="TextView" />
 
     <TextView
@@ -36,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/orderTime"
         android:layout_toEndOf="@+id/order_image"
+        android:textSize="13sp"
         android:text="TextView" />
 
     <LinearLayout
@@ -46,23 +56,29 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="5dp"
         android:gravity="center"
+        android:layout_marginTop="5dp"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/button_argee"
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="20dp"
+            android:layout_margin="5dp"
             android:text="同意"
-            android:textColor="#1cd8d2"
-            android:textSize="12sp" />
+            android:textColor="#fff"
+            android:background="#1cd8d2"
+            android:textSize="12sp"
+            android:gravity="center"/>
 
         <Button
             android:id="@+id/button_refuse"
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="20dp"
             android:text="拒绝"
-            android:textColor="#ff554c"
-            android:textSize="12sp" />
+            android:textColor="#fff"
+            android:background="#ff554c"
+            android:textSize="12sp"
+            android:gravity="center"/>
 
     </LinearLayout>
 </RelativeLayout>

@@ -23,26 +23,44 @@ import java.util.List;
 public class OrderFragment extends Fragment {
 
     private List<Patient> patientList = new ArrayList<>();
+    private View rootView;//缓存Fragment view
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order, container, false);
 
-        initPatients();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        if(rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_order, container, false);
+            initPatients();
+        }
+        ViewGroup parent = (ViewGroup) rootView.getParent();
+        if (parent != null)
+        {
+            parent.removeView(rootView);
+        }
+
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         OrderAdapter adapter = new OrderAdapter(patientList, getContext());
-        recyclerView.setAdapter(adapter);
 
-        return view;
+        recyclerView.setAdapter(adapter);
+        return rootView;
     }
 
-    private void initPatients(){
-        for(int i=0; i<5; i++) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    private void initPatients() {
+        patientList.clear();
+        for (int i = 0; i < 4; i++) {
             Patient patient1 = new Patient(R.drawable.viewpager3, "王患者", "预约时间", "情况");
             patientList.add(patient1);
         }
     }
+
+
 }

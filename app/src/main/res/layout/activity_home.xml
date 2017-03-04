@@ -10,10 +10,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="2.5"
         android:background="@drawable/title">
 
         <TextView
+            android:id="@+id/toolbar_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent='true'
@@ -35,8 +36,9 @@
     <FrameLayout
         android:id="@+id/realtabcontent"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="25">
+        android:layout_height="50dp"
+        android:layout_weight="25"
+        >
     </FrameLayout>
 
     <FrameLayout
@@ -55,8 +57,8 @@
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="0" />
+            android:layout_height="50dp"
+             />
 
     </android.support.v4.app.FragmentTabHost>
 

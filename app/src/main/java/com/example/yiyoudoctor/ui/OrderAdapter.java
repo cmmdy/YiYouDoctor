@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.yiyoudoctor.HomeActivity;
 import com.example.yiyoudoctor.R;
 
 import java.util.List;
@@ -39,6 +40,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             patientName = (TextView) view.findViewById(R.id.patientName);
             orderTime = (TextView) view.findViewById(R.id.orderTime);
             patientSituation = (TextView) view.findViewById(R.id.parentSituation);
+
         }
 
     }
@@ -60,10 +62,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Patient patient = mPatientList.get(position);
+
+        holder.orderImage.getLayoutParams().height = (int) (HomeActivity.HEIGHT / 13);
+        holder.orderImage.getLayoutParams().width = holder.orderImage.getLayoutParams().height;
+
         Glide.with(mContext).load(patient.getImageId()).into(holder.orderImage);
         holder.patientName.setText(patient.getName());
         holder.orderTime.setText(patient.getOrderTime());
         holder.patientSituation.setText(patient.getSituation());
+
+
     }
 
     @Override
