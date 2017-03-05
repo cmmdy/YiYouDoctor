@@ -23,14 +23,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.ui.HomeFragment;
+import com.example.yiyoudoctor.ui.MyFragment;
+import com.example.yiyoudoctor.ui.MyMessage;
 import com.example.yiyoudoctor.ui.OrderAdapter;
 import com.example.yiyoudoctor.ui.OrderFragment;
-
-import static android.R.attr.id;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
-import static com.example.yiyoudoctor.R.id.iv;
-import static com.example.yiyoudoctor.R.id.toolbar_text;
-import static com.example.yiyoudoctor.R.id.tv;
 
 
 public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChangeListener {
@@ -53,7 +49,7 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
 
     private String[] tabText = {"首页", "预约", "联系人", "我的"};
     private int[] imageRes = new int[]{R.drawable.homepager, R.drawable.contact, R.drawable.contact, R.drawable.mymessage};
-    private Class[] fragments = new Class[]{HomeFragment.class, OrderFragment.class, OrderFragment.class, OrderFragment.class};
+    private Class[] fragments = new Class[]{HomeFragment.class, OrderFragment.class, MyFragment.class, MyFragment.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,8 +112,8 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
         tabHost.setCurrentTab(0);
 
         //更改第一个选项卡颜色
-        TextView tv1 = (TextView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.tv);
-        ImageView iv1 = (ImageView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.iv);
+        TextView tv1 = (TextView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.tab_tv);
+        ImageView iv1 = (ImageView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.tab_iv);
         Glide.with(this).load(R.drawable.homepager_click).into(iv1);
         tv1.setTextColor(getResources().getColor(R.color.colorone));
 
@@ -131,9 +127,9 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
         for (int i = 0; i < tabText.length; i++) {
 
             View view = LayoutInflater.from(this).inflate(R.layout.item_tab, null, false);
-            tv = (TextView) view.findViewById(R.id.tv);
+            tv = (TextView) view.findViewById(R.id.tab_tv);
             tv.setText(tabText[i]);
-            iv = (ImageView) view.findViewById(R.id.iv);
+            iv = (ImageView) view.findViewById(R.id.tab_iv);
 
             iv.getLayoutParams().height = (int) (HEIGHT / 20);
             iv.getLayoutParams().width = iv.getLayoutParams().height;
@@ -151,14 +147,14 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
     @Override
     public void onTabChanged(String tabId) {
         TextView toolbar_text = (TextView) findViewById(R.id.toolbar_text);
-        TextView tv1 = (TextView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.tv);
-        ImageView iv1 = (ImageView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.iv);
-        TextView tv2 = (TextView) tabHost.getTabWidget().getChildAt(1).findViewById(R.id.tv);
-        ImageView iv2 = (ImageView) tabHost.getTabWidget().getChildAt(1).findViewById(R.id.iv);
-        TextView tv3 = (TextView) tabHost.getTabWidget().getChildAt(2).findViewById(R.id.tv);
-        ImageView iv3 = (ImageView) tabHost.getTabWidget().getChildAt(2).findViewById(R.id.iv);
-        TextView tv4 = (TextView) tabHost.getTabWidget().getChildAt(3).findViewById(R.id.tv);
-        ImageView iv4 = (ImageView) tabHost.getTabWidget().getChildAt(3).findViewById(R.id.iv);
+        TextView tv1 = (TextView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.tab_tv);
+        ImageView iv1 = (ImageView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.tab_iv);
+        TextView tv2 = (TextView) tabHost.getTabWidget().getChildAt(1).findViewById(R.id.tab_tv);
+        ImageView iv2 = (ImageView) tabHost.getTabWidget().getChildAt(1).findViewById(R.id.tab_iv);
+        TextView tv3 = (TextView) tabHost.getTabWidget().getChildAt(2).findViewById(R.id.tab_tv);
+        ImageView iv3 = (ImageView) tabHost.getTabWidget().getChildAt(2).findViewById(R.id.tab_iv);
+        TextView tv4 = (TextView) tabHost.getTabWidget().getChildAt(3).findViewById(R.id.tab_tv);
+        ImageView iv4 = (ImageView) tabHost.getTabWidget().getChildAt(3).findViewById(R.id.tab_iv);
         switch (tabId) {
             case "首页":
                 Glide.with(this).load(R.drawable.homepager_click).into(iv1);
