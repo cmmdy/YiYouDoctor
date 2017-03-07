@@ -1,7 +1,6 @@
-package com.example.yiyoudoctor.ui;
+package com.example.yiyoudoctor.fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.adapter.OrderAdapter;
+import com.example.yiyoudoctor.model.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +31,12 @@ public class OrderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        if(rootView == null) {
+        if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_order, container, false);
             initPatients();
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();
-        if (parent != null)
-        {
+        if (parent != null) {
             parent.removeView(rootView);
         }
 
@@ -55,9 +55,8 @@ public class OrderFragment extends Fragment {
     }
 
     private void initPatients() {
-        patientList.clear();
         for (int i = 0; i < 4; i++) {
-            Patient patient1 = new Patient(R.drawable.viewpager3, "王患者", "预约时间", "情况");
+            Patient patient1 = new Patient(R.drawable.viewpager3, "王患者", "预约时间", "20", "男", "情况");
             patientList.add(patient1);
         }
     }

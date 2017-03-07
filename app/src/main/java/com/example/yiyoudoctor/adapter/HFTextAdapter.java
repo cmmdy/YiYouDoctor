@@ -1,4 +1,4 @@
-package com.example.yiyoudoctor.ui;
+package com.example.yiyoudoctor.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,7 +12,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.model.HFText;
+import com.example.yiyoudoctor.other.getHW;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ import java.util.List;
  */
 
 public class HFTextAdapter extends ArrayAdapter<HFText> {
+    getHW gethw;
 
     private Context mContext;
 
@@ -44,13 +48,13 @@ public class HFTextAdapter extends ArrayAdapter<HFText> {
                     false);
             //动态修改高度
             RelativeLayout rlListView = (RelativeLayout) view.findViewById(R.id.rlListView);
-            rlListView.getLayoutParams().height = (int)(HomeFragment.HEIGHT/6);
+            rlListView.getLayoutParams().height = (int)(HomeActivity.gethw.getHEIGHT()/6);
 
 
             viewHolder = new ViewHolder();
             viewHolder.fftImage = (ImageView) view.findViewById
                     (R.id.first_fragment_text_image);
-            viewHolder.fftImage.getLayoutParams().width = (int)(HomeFragment.HEIGHT/6);
+            viewHolder.fftImage.getLayoutParams().width = (int)(HomeActivity.gethw.getHEIGHT()/6);
 
             viewHolder.fftTitleText = (TextView) view.findViewById
                     (R.id.first_fragment_text_title);

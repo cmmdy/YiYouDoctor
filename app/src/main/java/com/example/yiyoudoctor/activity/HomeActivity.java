@@ -1,39 +1,30 @@
-package com.example.yiyoudoctor;
+package com.example.yiyoudoctor.activity;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.yiyoudoctor.ui.HomeFragment;
-import com.example.yiyoudoctor.ui.MyFragment;
-import com.example.yiyoudoctor.ui.MyMessage;
-import com.example.yiyoudoctor.ui.OrderAdapter;
-import com.example.yiyoudoctor.ui.OrderFragment;
+import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.fragment.HomeFragment;
+import com.example.yiyoudoctor.fragment.MyFragment;
+import com.example.yiyoudoctor.fragment.OrderFragment;
+import com.example.yiyoudoctor.other.MyBitmap;
+import com.example.yiyoudoctor.other.getHW;
 
 
 public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChangeListener {
 
-    public static double WIDTH;
-
-    public static double HEIGHT;
+    public static getHW gethw;
 
     /**
      * FragmentTabhost
@@ -50,6 +41,9 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
     private String[] tabText = {"首页", "预约", "联系人", "我的"};
     private int[] imageRes = new int[]{R.drawable.homepager, R.drawable.contact, R.drawable.contact, R.drawable.mymessage};
     private Class[] fragments = new Class[]{HomeFragment.class, OrderFragment.class, MyFragment.class, MyFragment.class};
+
+    private static Drawable drawable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,10 +92,8 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
-        //获得屏幕大小
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        WIDTH = dm.widthPixels;
-        HEIGHT = dm.heightPixels;
+
+        gethw = new getHW(this);
 
         setContentView(R.layout.activity_home);
 
@@ -118,8 +110,16 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
         tv1.setTextColor(getResources().getColor(R.color.colorone));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MyBitmap bitmap = new MyBitmap(HomeActivity.this);
+                drawable = bitmap.vague();
+            }
+        }).start();
 
     }
 
@@ -131,7 +131,7 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
             tv.setText(tabText[i]);
             iv = (ImageView) view.findViewById(R.id.tab_iv);
 
-            iv.getLayoutParams().height = (int) (HEIGHT / 20);
+            iv.getLayoutParams().height = (int) (gethw.getHEIGHT() / 20);
             iv.getLayoutParams().width = iv.getLayoutParams().height;
             Glide.with(this).load(imageRes[i]).into(iv);
 
@@ -205,6 +205,9 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
 
     }
 
+    public static Drawable getDrawable() {
+        return drawable;
+    }
 
 }
 

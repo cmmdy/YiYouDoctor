@@ -1,23 +1,20 @@
-package com.example.yiyoudoctor.ui;
+package com.example.yiyoudoctor.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.yiyoudoctor.HomeActivity;
+import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.model.MyMessage;
 
 import java.util.List;
-
-import static com.example.yiyoudoctor.R.id.rlListView;
 
 
 /**
@@ -53,13 +50,13 @@ public class MyAdapter extends ArrayAdapter<MyMessage> {
 
             viewHolder = new ViewHolder();
             viewHolder.mmiv = (ImageView) view.findViewById(R.id.mmiv);
-            viewHolder.mmiv.getLayoutParams().width = (int)(HomeActivity.HEIGHT/25);
+            viewHolder.mmiv.getLayoutParams().width = (int)(HomeActivity.gethw.getHEIGHT()/25);
             viewHolder.mmiv.getLayoutParams().height = viewHolder.mmiv.getLayoutParams().width;
             viewHolder.mmtv = (TextView) view.findViewById(R.id.mmtv);
 //            TextPaint tp = viewHolder.mmtv.getPaint();
 //            tp.setFakeBoldText(true);
             viewHolder.backiv = (ImageView) view.findViewById(R.id.backiv);
-            viewHolder.backiv.getLayoutParams().height = (int)(HomeActivity.HEIGHT/45);
+            viewHolder.backiv.getLayoutParams().height = (int)(HomeActivity.gethw.getHEIGHT()/45);
             viewHolder.backiv.getLayoutParams().width = viewHolder.backiv.getLayoutParams().height;
 
             view.setTag(viewHolder);

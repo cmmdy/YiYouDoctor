@@ -1,10 +1,9 @@
-package com.example.yiyoudoctor.ui;
+package com.example.yiyoudoctor.fragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,7 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.bumptech.glide.Glide;
+import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.adapter.HFTextAdapter;
+import com.example.yiyoudoctor.model.HFText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,9 +26,6 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements ViewPager.OnPageChangeListener {
 
-    public static double WIDTH;
-
-    public static double HEIGHT;
 
     private List<HFText> fftList = new ArrayList<>();
 
@@ -126,17 +125,11 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         if (parent != null) {
             parent.removeView(rootView);
         }
-        //获得屏幕大小
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        WIDTH = dm.widthPixels;
-        HEIGHT = dm.heightPixels;
-
 
         FrameLayout frameLayout = (FrameLayout) viewheadlv.findViewById(R.id.headFL);
-        frameLayout.getLayoutParams().height = (int) (HEIGHT / 3.5);
+        frameLayout.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 3.5);
         FrameLayout point_layout = (FrameLayout) viewheadlv.findViewById(R.id.point_layout);
-        point_layout.getLayoutParams().height = (int) (HEIGHT / 35);
-
+        point_layout.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 35);
 
 
         viewPager.setOnTouchListener(new View.OnTouchListener() {

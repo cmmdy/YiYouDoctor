@@ -1,5 +1,6 @@
-package com.example.yiyoudoctor.ui;
+package com.example.yiyoudoctor.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.yiyoudoctor.HomeActivity;
+import com.example.yiyoudoctor.activity.HomeActivity;
+import com.example.yiyoudoctor.activity.PersonMessage;
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.adapter.MyAdapter;
+import com.example.yiyoudoctor.model.MyMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +34,7 @@ public class MyFragment extends Fragment {
     private View rootView;
     private View viewheadmm;
 
+    private RelativeLayout head_rl;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,14 +44,15 @@ public class MyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(viewheadmm == null) {
+        if (viewheadmm == null) {
             viewheadmm = inflater.inflate(R.layout.mm_item_head, null, false);
+            head_rl = (RelativeLayout) viewheadmm.findViewById(R.id.mmheadrl);
             ImageView head_iv = (ImageView) viewheadmm.findViewById(R.id.mmheadiv);
             ImageView head_back_iv = (ImageView) viewheadmm.findViewById(R.id.backheadiv);
             TextView head_tv = (TextView) viewheadmm.findViewById(R.id.mmheadtv);
-            head_iv.getLayoutParams().height = (int) (HomeActivity.HEIGHT / 14);
+            head_iv.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 14);
             head_iv.getLayoutParams().width = head_iv.getLayoutParams().height;
-            head_back_iv.getLayoutParams().height = (int) (HomeActivity.HEIGHT / 45);
+            head_back_iv.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 45);
             head_back_iv.getLayoutParams().width = head_back_iv.getLayoutParams().height;
             Glide.with(getActivity()).load(R.drawable.mymessage_click).into(head_iv);
             Glide.with(getActivity()).load(R.drawable.to).into(head_back_iv);
@@ -66,6 +73,15 @@ public class MyFragment extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
+
+        head_rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PersonMessage.class);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 
@@ -82,5 +98,10 @@ public class MyFragment extends Fragment {
         mmList.add(mm5);
     }
 
+
+    public void myMessage(View view) {
+        Intent intent = new Intent(getActivity(), PersonMessage.class);
+        startActivity(intent);
+    }
 }
 

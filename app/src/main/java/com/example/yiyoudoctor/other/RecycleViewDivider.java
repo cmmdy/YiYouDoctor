@@ -1,4 +1,4 @@
-package com.example.yiyoudoctor.ui;
+package com.example.yiyoudoctor.other;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -1,4 +1,4 @@
-package com.example.yiyoudoctor.ui;
+package com.example.yiyoudoctor.model;
 
 /**
  * Created by 夏夜晚凤 on 2017/3/2.

@@ -13,9 +13,12 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/mmheadrl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:clickable="true"
+        android:onClick="myMessage">
 
         <ImageView
             android:layout_width="10dp"
