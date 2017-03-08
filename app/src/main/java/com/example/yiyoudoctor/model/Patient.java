@@ -65,6 +65,7 @@ public class Patient implements Parcelable {
         situation = in.readString();
     }
 
+
     @Override
     public int describeContents() {
         return 0;

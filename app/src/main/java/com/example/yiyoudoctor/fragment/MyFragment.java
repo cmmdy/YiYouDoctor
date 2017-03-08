@@ -45,7 +45,7 @@ public class MyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (viewheadmm == null) {
-            viewheadmm = inflater.inflate(R.layout.mm_item_head, null, false);
+            viewheadmm = inflater.inflate(R.layout.my_listhead, null, false);
             head_rl = (RelativeLayout) viewheadmm.findViewById(R.id.mmheadrl);
             ImageView head_iv = (ImageView) viewheadmm.findViewById(R.id.mmheadiv);
             ImageView head_back_iv = (ImageView) viewheadmm.findViewById(R.id.backheadiv);
@@ -60,9 +60,9 @@ public class MyFragment extends Fragment {
         }
 
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_mm, null, false);
+            rootView = inflater.inflate(R.layout.my_fragment, null, false);
             imgIdArray = new int[]{R.drawable.doctor, R.drawable.publisharticle, R.drawable.collection, R.drawable.maillist, R.drawable.setting};
-            MyAdapter myAdapter = new MyAdapter(getActivity(), R.layout.mm_item, mmList);
+            MyAdapter myAdapter = new MyAdapter(getActivity(), R.layout.my_toolbar, mmList);
             ListView mmListView = (ListView) rootView.findViewById(R.id.mmListView);
             initmmList();
 

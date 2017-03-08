@@ -63,7 +63,7 @@ public class PersonMessage extends AppCompatActivity{
             decorView.setSystemUiVisibility(uiOptions);
         }
 
-        setContentView(R.layout.activity_person_message);
+        setContentView(R.layout.mymessage_activity);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         LinearLayout backll = (LinearLayout) findViewById(R.id.backll);
         backll.setOnClickListener(new View.OnClickListener() {

@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
-import com.example.yiyoudoctor.activity.ordermessage;
+import com.example.yiyoudoctor.activity.orderActivity;
 import com.example.yiyoudoctor.model.Patient;
 
 import java.util.List;
@@ -66,14 +66,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.ofp_item, parent, false);
+                .inflate(R.layout.order_listitem, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         holder.orderrl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Patient patient = mPatientList.get(position);
-                Intent intent = new Intent(mContext, ordermessage.class);
+                Intent intent = new Intent(mContext, orderActivity.class);
                 intent.putExtra("patient_data", patient);
                 mContext.startActivity(intent);
             }

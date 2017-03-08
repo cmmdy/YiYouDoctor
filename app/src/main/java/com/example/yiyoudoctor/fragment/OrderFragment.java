@@ -32,7 +32,7 @@ public class OrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_order, container, false);
+            rootView = inflater.inflate(R.layout.order_fragment, container, false);
             initPatients();
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();

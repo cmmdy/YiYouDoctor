@@ -26,7 +26,6 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements ViewPager.OnPageChangeListener {
 
-
     private List<HFText> fftList = new ArrayList<>();
 
 
@@ -64,10 +63,10 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (viewheadlv == null) {
-            viewheadlv = inflater.inflate(R.layout.headlv, null, false);
+            viewheadlv = inflater.inflate(R.layout.home_listhead, null, false);
         }
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_home, container, false);
+            rootView = inflater.inflate(R.layout.home_fragment, container, false);
             //初始化布局
             group = (ViewGroup) viewheadlv.findViewById(R.id.viewGroup);
             viewPager = (ViewPager) viewheadlv.findViewById(R.id.viewPager);
@@ -113,7 +112,7 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
             }).start();
 
             HFTextAdapter FFTAdapter = new HFTextAdapter
-                    (getActivity(), R.layout.hftext_item, fftList);
+                    (getActivity(), R.layout.home_listitem, fftList);
             ListView listView = (ListView) rootView.findViewById(R.id.fftListView);
             listView.addHeaderView(viewheadlv);
             initffts();

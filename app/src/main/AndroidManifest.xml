@@ -19,9 +19,8 @@
         </activity>
         <activity android:name=".activity.PersonMessage" />
         <activity
-            android:name=".activity.ordermessage"
+            android:name=".activity.orderActivity"
             android:label="" />
-        <activity android:name=".BaseActivity"></activity>
     </application>
 
 </manifest>

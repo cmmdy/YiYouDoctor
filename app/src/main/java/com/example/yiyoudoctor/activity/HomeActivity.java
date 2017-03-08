@@ -2,48 +2,43 @@ package com.example.yiyoudoctor.activity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.fragment.HomeFragment;
 import com.example.yiyoudoctor.fragment.MyFragment;
 import com.example.yiyoudoctor.fragment.OrderFragment;
+import com.example.yiyoudoctor.fragment.TestFragment;
 import com.example.yiyoudoctor.other.MyBitmap;
 import com.example.yiyoudoctor.other.getHW;
 
+import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChangeListener {
+
+public class HomeActivity extends BaseActivity {
 
     public static getHW gethw;
 
-    /**
-     * FragmentTabhost
-     */
-    private FragmentTabHost tabHost;
-
-    /**
-     * 布局填充器
-     */
-
-    private TextView tv;
-    private ImageView iv;
-
-    private String[] tabText = {"首页", "预约", "联系人", "我的"};
-    private int[] imageRes = new int[]{R.drawable.homepager, R.drawable.contact, R.drawable.contact, R.drawable.mymessage};
-    private Class[] fragments = new Class[]{HomeFragment.class, OrderFragment.class, MyFragment.class, MyFragment.class};
-
+    private BottomNavigationBar mBottomNavigationBar;
+    private ArrayList<Fragment> fragments;
     private static Drawable drawable;
 
+    private Fragment fragment1 = new HomeFragment();
+    private Fragment fragment2 = new OrderFragment();
+    private Fragment fragment3 = new TestFragment();
+    private Fragment fragment4 = new MyFragment();
+
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,24 +90,6 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
 
         gethw = new getHW(this);
 
-        setContentView(R.layout.activity_home);
-
-        tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
-        tabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
-        initTab();
-        tabHost.setOnTabChangedListener(this);
-        tabHost.setCurrentTab(0);
-
-        //更改第一个选项卡颜色
-        TextView tv1 = (TextView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.tab_tv);
-        ImageView iv1 = (ImageView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.tab_iv);
-        Glide.with(this).load(R.drawable.homepager_click).into(iv1);
-        tv1.setTextColor(getResources().getColor(R.color.colorone));
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -123,90 +100,75 @@ public class HomeActivity extends AppCompatActivity implements TabHost.OnTabChan
 
     }
 
-    private void initTab() {
-        for (int i = 0; i < tabText.length; i++) {
-
-            View view = LayoutInflater.from(this).inflate(R.layout.item_tab, null, false);
-            tv = (TextView) view.findViewById(R.id.tab_tv);
-            tv.setText(tabText[i]);
-            iv = (ImageView) view.findViewById(R.id.tab_iv);
-
-            iv.getLayoutParams().height = (int) (gethw.getHEIGHT() / 20);
-            iv.getLayoutParams().width = iv.getLayoutParams().height;
-            Glide.with(this).load(imageRes[i]).into(iv);
-
-            TabHost.TabSpec tabSpec = tabHost.newTabSpec(tabText[i]).setIndicator(view);
-            tabHost.addTab(tabSpec, fragments[i], null);
-            tabHost.setTag(i);
-        }
-
-
+    /**
+     * 初始化ui
+     **/
+    @Override
+    protected void initUI() {
+        setContentView(R.layout.home_activity);
+        assignViews();
+        title = generateFindViewById(R.id.title);
     }
 
+    @Override
+    protected void initData() {
+    }
 
     @Override
-    public void onTabChanged(String tabId) {
-        TextView toolbar_text = (TextView) findViewById(R.id.toolbar_text);
-        TextView tv1 = (TextView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.tab_tv);
-        ImageView iv1 = (ImageView) tabHost.getTabWidget().getChildAt(0).findViewById(R.id.tab_iv);
-        TextView tv2 = (TextView) tabHost.getTabWidget().getChildAt(1).findViewById(R.id.tab_tv);
-        ImageView iv2 = (ImageView) tabHost.getTabWidget().getChildAt(1).findViewById(R.id.tab_iv);
-        TextView tv3 = (TextView) tabHost.getTabWidget().getChildAt(2).findViewById(R.id.tab_tv);
-        ImageView iv3 = (ImageView) tabHost.getTabWidget().getChildAt(2).findViewById(R.id.tab_iv);
-        TextView tv4 = (TextView) tabHost.getTabWidget().getChildAt(3).findViewById(R.id.tab_tv);
-        ImageView iv4 = (ImageView) tabHost.getTabWidget().getChildAt(3).findViewById(R.id.tab_iv);
-        switch (tabId) {
-            case "首页":
-                Glide.with(this).load(R.drawable.homepager_click).into(iv1);
-                tv1.setTextColor(getResources().getColor(R.color.colorone));
-                Glide.with(this).load(R.drawable.contact).into(iv2);
-                tv2.setTextColor(getResources().getColor(R.color.colorBlack));
-                Glide.with(this).load(R.drawable.contact).into(iv3);
-                tv3.setTextColor(getResources().getColor(R.color.colorBlack));
-                Glide.with(this).load(R.drawable.mymessage).into(iv4);
-                tv4.setTextColor(getResources().getColor(R.color.colorBlack));
-                toolbar_text.setText("首页");
-                break;
-            case "预约":
-                Glide.with(this).load(R.drawable.homepager).into(iv1);
-                tv1.setTextColor(getResources().getColor(R.color.colorBlack));
-                Glide.with(this).load(R.drawable.contact_click).into(iv2);
-                tv2.setTextColor(getResources().getColor(R.color.colorone));
-                Glide.with(this).load(R.drawable.contact).into(iv3);
-                tv3.setTextColor(getResources().getColor(R.color.colorBlack));
-                Glide.with(this).load(R.drawable.mymessage).into(iv4);
-                tv4.setTextColor(getResources().getColor(R.color.colorBlack));
-                toolbar_text.setText("预约");
-                break;
-            case "联系人":
-                Glide.with(this).load(R.drawable.homepager).into(iv1);
-                tv1.setTextColor(getResources().getColor(R.color.colorBlack));
-                Glide.with(this).load(R.drawable.contact).into(iv2);
-                tv2.setTextColor(getResources().getColor(R.color.colorBlack));
-                Glide.with(this).load(R.drawable.contact_click).into(iv3);
-                tv3.setTextColor(getResources().getColor(R.color.colorone));
-                Glide.with(this).load(R.drawable.mymessage).into(iv4);
-                tv4.setTextColor(getResources().getColor(R.color.colorBlack));
-                toolbar_text.setText("联系人");
-                break;
-            case "我的":
-                Glide.with(this).load(R.drawable.homepager).into(iv1);
-                tv1.setTextColor(getResources().getColor(R.color.colorBlack));
-                Glide.with(this).load(R.drawable.contact).into(iv2);
-                tv2.setTextColor(getResources().getColor(R.color.colorBlack));
-                Glide.with(this).load(R.drawable.contact).into(iv3);
-                tv3.setTextColor(getResources().getColor(R.color.colorBlack));
-                Glide.with(this).load(R.drawable.mymessage_click).into(iv4);
-                tv4.setTextColor(getResources().getColor(R.color.colorone));
-                toolbar_text.setText("我的");
-                break;
+    protected void initListener() {
+        mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position) {
+                smartFragmentReplace(R.id.root, fragments.get(position));
+            }
 
-        }
+            @Override
+            public void onTabUnselected(int position) {
 
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void initToolbar() {
+        title.setText("首页");
     }
 
     public static Drawable getDrawable() {
         return drawable;
+    }
+
+    private void assignViews() {
+        mBottomNavigationBar = generateFindViewById(R.id.bottom_bar);
+        mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
+        mBottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
+        mBottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.homepager, "首页").setInActiveColor(R.color.colorBlack).setActiveColor(R.color.colorone))
+                .addItem(new BottomNavigationItem(R.drawable.contact, "预约").setInActiveColor(R.color.colorBlack).setActiveColor(R.color.colorone))
+                .addItem(new BottomNavigationItem(R.drawable.contact, "联系人").setInActiveColor(R.color.colorBlack).setActiveColor(R.color.colorone))
+                .addItem(new BottomNavigationItem(R.drawable.mymessage, "我的").setInActiveColor(R.color.colorBlack).setActiveColor(R.color.colorone))
+                .setFirstSelectedPosition(0)
+                .initialise();
+
+        fragments = getFragments();
+        setDefaultFragment();//设置默认选项
+    }
+
+    private void setDefaultFragment() {
+        smartFragmentReplace(R.id.root, fragment1);
+    }
+
+    private ArrayList<Fragment> getFragments() {
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(fragment1);
+        fragments.add(fragment2);
+        fragments.add(fragment3);
+        fragments.add(fragment4);
+        return fragments;
     }
 
 }

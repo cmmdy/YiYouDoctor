@@ -1,7 +1,6 @@
 package com.example.yiyoudoctor.activity;
 
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,10 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.model.Patient;
 
-public class ordermessage extends AppCompatActivity {
+public class orderActivity extends BaseActivity {
 
     private ImageView imageView;
 
@@ -26,6 +26,16 @@ public class ordermessage extends AppCompatActivity {
     private TextView sex;
 
     private TextView situation;
+
+    private Button agree_button;
+
+    private Button refuse_button;
+
+    private LinearLayout backll;
+
+    private TextView backtv;
+
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,44 +52,59 @@ public class ordermessage extends AppCompatActivity {
             decorView.setSystemUiVisibility(uiOptions);
         }
 
-        setContentView(R.layout.activity_ordermessage);
 
-        imageView = (ImageView) findViewById(R.id.imageView4);
-        name = (TextView) findViewById(R.id.name_tv);
-        age = (TextView) findViewById(R.id.age_tv);
-        sex = (TextView) findViewById(R.id.sex_tv);
-        situation = (TextView) findViewById(R.id.textView);
-        Button agree_button = (Button) findViewById(R.id.button_argee);
-        Button refuse_button = (Button) findViewById(R.id.button_refuse);
+    }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    @Override
+    protected void initUI() {
+        setContentView(R.layout.order_avtivity);
 
-        LinearLayout backll = (LinearLayout) findViewById(R.id.backll);
+        imageView = generateFindViewById(R.id.imageView4);
+        name = generateFindViewById(R.id.name_tv);
+        age = generateFindViewById(R.id.age_tv);
+        sex = generateFindViewById(R.id.sex_tv);
+        situation = generateFindViewById(R.id.textView);
+        agree_button = generateFindViewById(R.id.button_argee);
+        refuse_button = generateFindViewById(R.id.button_refuse);
+
+        backll = (LinearLayout) findViewById(R.id.backll);
+        backtv = generateFindViewById(R.id.backtv);
+        title = generateFindViewById(R.id.title);
+    }
+
+    @Override
+    protected void initData() {
+        initPatient();
+    }
+
+    @Override
+    protected void initListener() {
         backll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
         agree_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ordermessage.this, "您已同意该预约门诊", Toast.LENGTH_SHORT).show();
+                Toast.makeText(orderActivity.this, "您已同意该预约门诊", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
         refuse_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ordermessage.this, "您已拒绝该预约门诊",  Toast.LENGTH_SHORT).show();
+                Toast.makeText(orderActivity.this, "您已拒绝该预约门诊",  Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
+    }
 
-        setSupportActionBar(toolbar);
-
-        initPatient();
+    @Override
+    protected void initToolbar() {
+        backtv.setText("预约");
+        title.setText("预约门诊");
     }
 
     public void initPatient(){
