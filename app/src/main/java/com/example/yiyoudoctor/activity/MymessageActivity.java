@@ -11,38 +11,58 @@ import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 
+import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MymessageActivity extends BaseActivity {
-
-
-    RelativeLayout imagerl;
-    CircleImageView civ1;
-
-    TextView nametv;
-    TextView phonetv;
-    TextView sextv;
-    TextView agetv;
-    TextView astv;
-    TextView altv;
-
-    CircleImageView civ2;
-    TextView persontv;
-
-    ImageView messageiv;
-    TextView mntv;
-    TextView mdtv1;
-    TextView mstv;
-    LinearLayout phonell;
-    TextView mptv;
-    LinearLayout addressll;
-    TextView matv;
-    CircleImageView civ3;
-    TextView mdtv2;
-
-    LinearLayout backll;
+    @BindView(R.id.backiv)
+    ImageView backiv;
+    @BindView(R.id.backtv)
     TextView backtv;
+    @BindView(R.id.backll)
+    LinearLayout backll;
+    @BindView(R.id.title)
     TextView title;
+    @BindView(R.id.civ1)
+    CircleImageView civ1;
+    @BindView(R.id.imageLayout)
+    RelativeLayout imagerl;
+    @BindView(R.id.name_tv)
+    TextView nametv;
+    @BindView(R.id.phone_tv)
+    TextView phonetv;
+    @BindView(R.id.sex_tv)
+    TextView sextv;
+    @BindView(R.id.age_tv)
+    TextView agetv;
+    @BindView(R.id.as_tv)
+    TextView astv;
+    @BindView(R.id.al_tv)
+    TextView altv;
+    @BindView(R.id.adress_tv)
+    TextView matv;
+    @BindView(R.id.person_tv)
+    TextView persontv;
+    @BindView(R.id.civ2)
+    CircleImageView civ2;
+    @BindView(R.id.messageiv)
+    ImageView messageiv;
+    @BindView(R.id.messagename_tv)
+    TextView mntv;
+    @BindView(R.id.messagedoctor_tv1)
+    TextView mdtv1;
+    @BindView(R.id.messagescore_tv)
+    TextView mstv;
+    @BindView(R.id.messagephone_tv)
+    TextView mptv;
+    @BindView(R.id.phonell)
+    LinearLayout phonell;
+    @BindView(R.id.addressll)
+    LinearLayout addressll;
+    @BindView(R.id.civ3)
+    CircleImageView civ3;
+    @BindView(R.id.messagedoctor_tv2)
+    TextView mdtv2;
 
 
     @Override
@@ -51,8 +71,13 @@ public class MymessageActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.mymessage_activity;
+    }
+
+
+    @Override
     protected void initUI() {
-        setContentView(R.layout.mymessage_activity);
 
         imagerl = (RelativeLayout) findViewById(R.id.imageLayout);
         civ1 = (CircleImageView) findViewById(R.id.civ1);

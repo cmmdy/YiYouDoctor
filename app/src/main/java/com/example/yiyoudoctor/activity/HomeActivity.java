@@ -1,14 +1,14 @@
 package com.example.yiyoudoctor.activity;
 
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.yiyoudoctor.Base.BaseActivity;
-import com.example.yiyoudoctor.Base.BaseFragment;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.fragment.HomeFragment;
 import com.example.yiyoudoctor.fragment.MyFragment;
@@ -19,12 +19,17 @@ import com.example.yiyoudoctor.other.getHW;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+
 
 public class HomeActivity extends BaseActivity {
 
     public static getHW gethw;
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.bottom_bar)
+    BottomNavigationBar mBottomNavigationBar;
 
-    private BottomNavigationBar mBottomNavigationBar;
     private ArrayList<Fragment> fragments;
     private static Drawable drawable;
 
@@ -32,8 +37,6 @@ public class HomeActivity extends BaseActivity {
     private Fragment fragment2 = new OrderFragment();
     private Fragment fragment3 = new TestFragment();
     private Fragment fragment4 = new MyFragment();
-
-    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +53,14 @@ public class HomeActivity extends BaseActivity {
 
     }
 
-    /**
-     * 初始化ui
-     **/
+    @Override
+    protected int getLayoutId() {
+        return R.layout.home_activity;
+    }
+
     @Override
     protected void initUI() {
-        setContentView(R.layout.home_activity);
         assignViews();
-        title = generateFindViewById(R.id.title);
     }
 
     @Override
@@ -69,7 +72,7 @@ public class HomeActivity extends BaseActivity {
         mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
                         setTitle("首页");
                         break;
@@ -112,7 +115,6 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void assignViews() {
-        mBottomNavigationBar = generateFindViewById(R.id.bottom_bar);
         mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         mBottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
         mBottomNavigationBar.setInActiveColor(R.color.colorBlack);
@@ -142,7 +144,7 @@ public class HomeActivity extends BaseActivity {
         return fragments;
     }
 
-    private void setTitle(String title1){
+    private void setTitle(String title1) {
         title.setText(title1);
     }
 

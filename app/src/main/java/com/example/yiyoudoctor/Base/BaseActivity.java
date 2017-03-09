@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
 
+import butterknife.ButterKnife;
+
 import static android.R.attr.fragment;
 
 /**
@@ -62,6 +64,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // 将activity推入栈中
         listActivity.push(this);
+        //绑定布局文件
+        setContentView(getLayoutId());
+        //绑定ButterKnife
+        ButterKnife.bind(this);
         // 初始化ui
         initUI();
         // 初始化数据
@@ -73,8 +79,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         initToolbar();
         setSupportActionBar(toolbar);
 
+
+
     }
 
+    /**
+     * 获得布局ID
+     * @return
+     */
+    protected abstract int getLayoutId();
 
     /**
      * 初始化ui
@@ -181,6 +194,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.finish();
     }
 
+
+
     /***************************************************************/
 
     /**
@@ -244,14 +259,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (KeyEvent.KEYCODE_BACK == keyCode) {
-            // 判断是否在两秒之内连续点击返回键，是则退出，否则不退出
-            if (System.currentTimeMillis() - exitTime > 2000) {
-                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
-                // 将系统当前的时间赋值给exitTime
-                exitTime = System.currentTimeMillis();
-            } else {
-                finishAll();
-            }
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);

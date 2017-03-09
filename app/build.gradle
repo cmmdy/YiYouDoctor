@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 25
@@ -16,6 +17,8 @@ android {
         main {
             res.srcDirs =
                     [
+                            'src/main/res/layout/collection',
+                            'src/main/res/layout/text',
                             'src/main/res/layout/toolbar',
                             'src/main/res/layout/mymessage',
                             'src/main/res/layout/my',
@@ -50,7 +53,9 @@ dependencies {
     compile 'net.qiujuer.genius:blur:2.0.0-beta4'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:design:25.2.0'
-    compile'com.ashokvarma.android:bottom-navigation-bar:1.2.0'
+    compile 'com.ashokvarma.android:bottom-navigation-bar:1.2.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
+    compile 'com.jakewharton:butterknife:8.5.1'
     testCompile 'junit:junit:4.12'
-
+    apt 'com.jakewharton:butterknife-compiler:8.5.1'
 }

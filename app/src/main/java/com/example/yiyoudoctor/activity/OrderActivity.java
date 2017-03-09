@@ -13,6 +13,8 @@ import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.model.Patient;
 
+import static android.R.attr.id;
+
 public class OrderActivity extends BaseActivity {
 
     private ImageView imageView;
@@ -41,8 +43,13 @@ public class OrderActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.order_avtivity;
+    }
+
+
+    @Override
     protected void initUI() {
-        setContentView(R.layout.order_avtivity);
 
         imageView = generateFindViewById(R.id.imageView4);
         name = generateFindViewById(R.id.name_tv);

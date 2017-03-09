@@ -1,12 +1,9 @@
 package com.example.yiyoudoctor.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -14,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.Base.BaseFragment;
+import com.example.yiyoudoctor.activity.CollectionActivity;
 import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.activity.MymessageActivity;
 import com.example.yiyoudoctor.R;
@@ -28,10 +26,6 @@ import java.util.List;
  */
 
 public class MyFragment extends BaseFragment {
-
-
-
-    private String title = "我的";
 
     private int[] imgIdArray;
 
@@ -62,7 +56,7 @@ public class MyFragment extends BaseFragment {
         head_tv.setText("王患者");
 
         imgIdArray = new int[]{R.drawable.doctor, R.drawable.publisharticle, R.drawable.collection, R.drawable.maillist, R.drawable.setting};
-        MyAdapter myAdapter = new MyAdapter(getActivity(), R.layout.my_toolbar, mmList);
+        MyAdapter myAdapter = new MyAdapter(getActivity(), R.layout.mm_item, mmList);
         ListView mmListView = (ListView) view.findViewById(R.id.mmListView);
         initmmList();
 
@@ -76,11 +70,27 @@ public class MyFragment extends BaseFragment {
             }
         });
 
+        mmListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (mmList.get(i-1).getText()){
+                    case "医师认证":
+                        break;
+                    case "发布文章":
+                        break;
+                    case "我的收藏":
+                        getHoldingActivity().openActivity(CollectionActivity.class);
+                        break;
+                    case "通讯录":
+                        break;
+                    case "设置":
+                        break;
 
-    }
+                }
+            }
+        });
 
-    public String getTitle() {
-        return title;
+
     }
 
     @Override

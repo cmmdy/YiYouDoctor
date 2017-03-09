@@ -12,12 +12,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.model.HFText;
-import com.example.yiyoudoctor.other.getHW;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
@@ -25,7 +27,6 @@ import java.util.List;
  */
 
 public class HFTextAdapter extends ArrayAdapter<HFText> {
-    getHW gethw;
 
     private Context mContext;
 
@@ -48,13 +49,13 @@ public class HFTextAdapter extends ArrayAdapter<HFText> {
                     false);
             //动态修改高度
             RelativeLayout rlListView = (RelativeLayout) view.findViewById(R.id.rlListView);
-            rlListView.getLayoutParams().height = (int)(HomeActivity.gethw.getHEIGHT()/6);
+            rlListView.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 6);
 
 
-            viewHolder = new ViewHolder();
+            viewHolder = new ViewHolder(view);
             viewHolder.fftImage = (ImageView) view.findViewById
                     (R.id.first_fragment_text_image);
-            viewHolder.fftImage.getLayoutParams().width = (int)(HomeActivity.gethw.getHEIGHT()/6);
+            viewHolder.fftImage.getLayoutParams().width = (int) (HomeActivity.gethw.getHEIGHT() / 6);
 
             viewHolder.fftTitleText = (TextView) view.findViewById
                     (R.id.first_fragment_text_title);
@@ -76,13 +77,18 @@ public class HFTextAdapter extends ArrayAdapter<HFText> {
         return view;
     }
 
-    class ViewHolder {
+    static class ViewHolder {
+        @BindView(R.id.first_fragment_text_image)
         ImageView fftImage;
-
+        @BindView(R.id.first_fragment_text_title)
         TextView fftTitleText;
-
+        @BindView(R.id.first_fragment_text_introduction)
         TextView fftIntroductionText;
-
+        @BindView(R.id.first_fragment_time)
         TextView fftTime;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

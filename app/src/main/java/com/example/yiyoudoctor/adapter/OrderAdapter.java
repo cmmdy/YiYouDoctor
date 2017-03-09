@@ -13,12 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.activity.OrderActivity;
 import com.example.yiyoudoctor.model.Patient;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by 夏夜晚凤 on 2017/3/3.
@@ -30,32 +33,26 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     private Context mContext;
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-
+    class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.order_image)
         ImageView orderImage;
-
+        @BindView(R.id.patientName)
         TextView patientName;
-
+        @BindView(R.id.orderTime)
         TextView orderTime;
-
+        @BindView(R.id.parentSituation)
         TextView patientSituation;
-
+        @BindView(R.id.button_argee)
         Button agree_button;
-
+        @BindView(R.id.button_refuse)
         Button refuse_button;
-
+        @BindView(R.id.orderrl)
         RelativeLayout orderrl;
-        public ViewHolder(View view) {
-            super(view);
-            orderImage = (ImageView) view.findViewById(R.id.order_image);
-            patientName = (TextView) view.findViewById(R.id.patientName);
-            orderTime = (TextView) view.findViewById(R.id.orderTime);
-            patientSituation = (TextView) view.findViewById(R.id.parentSituation);
-            orderrl = (RelativeLayout) view.findViewById(R.id.orderrl);
-            agree_button = (Button) view.findViewById(R.id.button_argee);
-            refuse_button = (Button) view.findViewById(R.id.button_refuse);
-        }
 
+        ViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
     }
 
     public OrderAdapter(List<Patient> mPatientList, Context context) {
@@ -87,7 +84,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.refuse_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "您已拒绝该预约门诊",  Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "您已拒绝该预约门诊", Toast.LENGTH_SHORT).show();
             }
         });
         return holder;
@@ -113,4 +110,5 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public int getItemCount() {
         return mPatientList.size();
     }
+
 }

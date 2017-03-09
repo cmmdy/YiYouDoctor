@@ -10,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.model.MyMessage;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
@@ -36,7 +39,7 @@ public class MyAdapter extends ArrayAdapter<MyMessage> {
 
     @NonNull
     @Override
-    public View getView(int position ,View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         MyMessage mm = getItem(position);
         View view;
         ViewHolder viewHolder;
@@ -47,16 +50,13 @@ public class MyAdapter extends ArrayAdapter<MyMessage> {
 //            RelativeLayout rlListView = (RelativeLayout) view.findViewById(rlListView);
 //            rlListView.getLayoutParams().height = (int)(HomeFragment.HEIGHT/6);
 
-
-            viewHolder = new ViewHolder();
+            viewHolder = new ViewHolder(view);
             viewHolder.mmiv = (ImageView) view.findViewById(R.id.mmiv);
-            viewHolder.mmiv.getLayoutParams().width = (int)(HomeActivity.gethw.getHEIGHT()/25);
+            viewHolder.mmiv.getLayoutParams().width = (int) (HomeActivity.gethw.getHEIGHT() / 25);
             viewHolder.mmiv.getLayoutParams().height = viewHolder.mmiv.getLayoutParams().width;
             viewHolder.mmtv = (TextView) view.findViewById(R.id.mmtv);
-//            TextPaint tp = viewHolder.mmtv.getPaint();
-//            tp.setFakeBoldText(true);
             viewHolder.backiv = (ImageView) view.findViewById(R.id.backiv);
-            viewHolder.backiv.getLayoutParams().height = (int)(HomeActivity.gethw.getHEIGHT()/45);
+            viewHolder.backiv.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 45);
             viewHolder.backiv.getLayoutParams().width = viewHolder.backiv.getLayoutParams().height;
 
             view.setTag(viewHolder);
@@ -71,10 +71,15 @@ public class MyAdapter extends ArrayAdapter<MyMessage> {
     }
 
     class ViewHolder {
+        @BindView(R.id.mmiv)
         ImageView mmiv;
-
+        @BindView(R.id.backiv)
+        ImageView backiv;
+        @BindView(R.id.mmtv)
         TextView mmtv;
 
-        ImageView backiv;
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

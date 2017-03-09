@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.Base.BaseFragment;
 import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.activity.TextActivity;
 import com.example.yiyoudoctor.adapter.HFTextAdapter;
 import com.example.yiyoudoctor.model.HFText;
 
@@ -27,7 +29,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
     private String title = "首页";
 
-    private List<HFText> fftList = new ArrayList<>();
+    private static List<HFText> fftList = new ArrayList<>();
 
 
     /**
@@ -132,6 +134,13 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                         break;
                 }
                 return false;
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                getHoldingActivity().openActivity(TextActivity.class);
             }
         });
 

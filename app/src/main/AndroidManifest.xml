@@ -23,6 +23,8 @@
         <activity
             android:name=".activity.OrderActivity"
             android:label="" />
+        <activity android:name=".activity.TextActivity" />
+        <activity android:name=".activity.CollectionActivity"></activity>
     </application>
 
 </manifest>
