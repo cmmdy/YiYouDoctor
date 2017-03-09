@@ -17,9 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PersonMessage" />
         <activity
-            android:name=".activity.orderActivity"
+            android:name=".activity.MymessageActivity"
+            android:label="" />
+        <activity
+            android:name=".activity.OrderActivity"
             android:label="" />
     </application>
 

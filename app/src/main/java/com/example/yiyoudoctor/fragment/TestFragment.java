@@ -6,16 +6,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.yiyoudoctor.Base.BaseFragment;
 import com.example.yiyoudoctor.R;
 
-public class TestFragment extends Fragment {
+public class TestFragment extends BaseFragment {
+
+    private String title = "联系人";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        View view = View.inflate(getActivity(), R.layout.fragment_test, null);
-//		return inflater.inflate(R.layout.fragment, null);
-        return view;
+    protected void initView(View view, Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_test;
+    }
+
+    public String getTitle() {
+        return title;
     }
 }

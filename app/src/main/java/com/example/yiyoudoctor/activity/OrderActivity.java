@@ -1,8 +1,6 @@
 package com.example.yiyoudoctor.activity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,7 +13,7 @@ import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.model.Patient;
 
-public class orderActivity extends BaseActivity {
+public class OrderActivity extends BaseActivity {
 
     private ImageView imageView;
 
@@ -40,19 +38,6 @@ public class orderActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
-            View v = this.getWindow().getDecorView();
-            v.setSystemUiVisibility(View.GONE);
-        } else if (Build.VERSION.SDK_INT >= 19) {
-            //for new api versions.
-            View decorView = getWindow().getDecorView();
-            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
-            decorView.setSystemUiVisibility(uiOptions);
-        }
-
-
     }
 
     @Override
@@ -88,14 +73,14 @@ public class orderActivity extends BaseActivity {
         agree_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(orderActivity.this, "您已同意该预约门诊", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OrderActivity.this, "您已同意该预约门诊", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
         refuse_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(orderActivity.this, "您已拒绝该预约门诊",  Toast.LENGTH_SHORT).show();
+                Toast.makeText(OrderActivity.this, "您已拒绝该预约门诊",  Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -105,6 +90,11 @@ public class orderActivity extends BaseActivity {
     protected void initToolbar() {
         backtv.setText("预约");
         title.setText("预约门诊");
+    }
+
+    @Override
+    protected int getFragmentContentId() {
+        return 0;
     }
 
     public void initPatient(){

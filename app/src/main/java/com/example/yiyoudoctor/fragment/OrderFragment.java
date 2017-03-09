@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.yiyoudoctor.Base.BaseActivity;
+import com.example.yiyoudoctor.Base.BaseFragment;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.adapter.OrderAdapter;
 import com.example.yiyoudoctor.model.Patient;
@@ -21,37 +23,34 @@ import java.util.List;
  * Created by 夏夜晚凤 on 2017/3/2.
  */
 
-public class OrderFragment extends Fragment {
+public class OrderFragment extends BaseFragment {
+
+    private String title = "预约";
 
     private List<Patient> patientList = new ArrayList<>();
-    private View rootView;//缓存Fragment view
-
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        if (rootView == null) {
-            rootView = inflater.inflate(R.layout.order_fragment, container, false);
-            initPatients();
-        }
-        ViewGroup parent = (ViewGroup) rootView.getParent();
-        if (parent != null) {
-            parent.removeView(rootView);
-        }
-
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        OrderAdapter adapter = new OrderAdapter(patientList, getContext());
-
-        recyclerView.setAdapter(adapter);
-        return rootView;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initView(View view, Bundle savedInstanceState) {
+        initPatients();
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        OrderAdapter adapter = new OrderAdapter(patientList, getContext());
+        recyclerView.setAdapter(adapter);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.order_fragment;
     }
 
     private void initPatients() {

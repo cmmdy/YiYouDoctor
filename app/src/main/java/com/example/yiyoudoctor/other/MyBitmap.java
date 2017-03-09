@@ -23,9 +23,9 @@ public class MyBitmap implements Transformation {
         this.activity = activity;
     }
 
-    public Drawable vague(){
-        Bitmap bmp= BitmapFactory.decodeResource(activity.getResources(), R.drawable.viewpager1);
-        Bitmap newBitmap = StackBlur.blurNatively(transform(bmp), 15, false);
+    public Drawable vague(int id, int math){
+        Bitmap bmp= BitmapFactory.decodeResource(activity.getResources(), id);
+        Bitmap newBitmap = StackBlur.blurNatively(transform(bmp), math, false);
         Drawable drawable =new BitmapDrawable(newBitmap);
         return drawable;
     }

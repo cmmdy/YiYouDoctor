@@ -1,10 +1,8 @@
 package com.example.yiyoudoctor.fragment;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.bumptech.glide.Glide;
+import com.example.yiyoudoctor.Base.BaseFragment;
 import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.adapter.HFTextAdapter;
@@ -24,7 +23,9 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment implements ViewPager.OnPageChangeListener {
+public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
+
+    private String title = "首页";
 
     private List<HFText> fftList = new ArrayList<>();
 
@@ -51,7 +52,6 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
 
     private boolean isLooper;
     private boolean ifStop = false;
-    private View rootView;
     private View viewheadlv;
     private ViewGroup group;
 
@@ -61,75 +61,64 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (viewheadlv == null) {
-            viewheadlv = inflater.inflate(R.layout.home_listhead, null, false);
-        }
-        if (rootView == null) {
-            rootView = inflater.inflate(R.layout.home_fragment, container, false);
-            //初始化布局
-            group = (ViewGroup) viewheadlv.findViewById(R.id.viewGroup);
-            viewPager = (ViewPager) viewheadlv.findViewById(R.id.viewPager);
-            //载入图片资源ID
-            imgIdArray = new int[]{R.drawable.viewpager1, R.drawable.viewpager2, R.drawable.viewpager3, R.drawable.viewpager4,};
-            addtips();
-            addimage();
+    protected void initView(View view, Bundle savedInstanceState) {
+        viewheadlv = getLayoutInflater(null).inflate(R.layout.home_listhead, null, false);
 
-            //设置Adapter
-            viewPager.setAdapter(new MyAdapter());
-            //设置监听，主要是设置点点的背景
-            viewPager.setOnPageChangeListener(this);
-            //设置ViewPager的默认项, 设置为长度的100倍，这样子开始就能往左滑动
-            viewPager.setCurrentItem((mImageViews.length) * 100);
+        //初始化布局
+        group = (ViewGroup) viewheadlv.findViewById(R.id.viewGroup);
+        viewPager = (ViewPager) viewheadlv.findViewById(R.id.viewPager);
+        //载入图片资源ID
+        imgIdArray = new int[]{R.drawable.viewpager1, R.drawable.viewpager2, R.drawable.viewpager3, R.drawable.viewpager4,};
+        addtips();
+        addimage();
+
+        //设置Adapter
+        viewPager.setAdapter(new MyAdapter());
+        //设置监听，主要是设置点点的背景
+        viewPager.setOnPageChangeListener(this);
+        //设置ViewPager的默认项, 设置为长度的100倍，这样子开始就能往左滑动
+        viewPager.setCurrentItem((mImageViews.length) * 100);
 
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    isLooper = true;
-                    while (isLooper) {
-                        try {
-                            Thread.sleep(2600);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                isLooper = true;
+                while (isLooper) {
+                    try {
+                        Thread.sleep(2600);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-                        if (getActivity() == null) {
-                            return;
-                        }
+                    if (getActivity() == null) {
+                        return;
+                    }
 
-                        if (!ifStop) {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //这里是设置当前页的下一页
-                                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                                }
-                            });
-                        }
+                    if (!ifStop) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //这里是设置当前页的下一页
+                                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                            }
+                        });
                     }
                 }
-            }).start();
+            }
+        }).start();
 
-            HFTextAdapter FFTAdapter = new HFTextAdapter
-                    (getActivity(), R.layout.home_listitem, fftList);
-            ListView listView = (ListView) rootView.findViewById(R.id.fftListView);
-            listView.addHeaderView(viewheadlv);
-            initffts();
-            listView.setAdapter(FFTAdapter);
-
-
-        }
-        ViewGroup parent = (ViewGroup) rootView.getParent();
-        if (parent != null) {
-            parent.removeView(rootView);
-        }
+        HFTextAdapter FFTAdapter = new HFTextAdapter
+                (getActivity(), R.layout.home_listitem, fftList);
+        ListView listView = (ListView) view.findViewById(R.id.fftListView);
+        listView.addHeaderView(viewheadlv);
+        initffts();
+        listView.setAdapter(FFTAdapter);
 
         FrameLayout frameLayout = (FrameLayout) viewheadlv.findViewById(R.id.headFL);
         frameLayout.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 3.5);
         FrameLayout point_layout = (FrameLayout) viewheadlv.findViewById(R.id.point_layout);
         point_layout.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 35);
-
 
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -146,8 +135,15 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
             }
         });
 
+    }
 
-        return rootView;
+    @Override
+    protected int getLayoutId() {
+        return R.layout.home_fragment;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     private void addtips() {
@@ -195,19 +191,13 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
 
         @Override
         public void destroyItem(View container, int position, Object object) {
-//            int newPosition = position % mImageViews.length;
-//            container.((View)mImageViews[newPosition]);
         }
 
-        /**
-         * 载入图片进去，用当前的position 除以 图片数组长度取余数是关键
-         */
         @Override
         public Object instantiateItem(View container, int position) {
             try {
                 ((ViewPager) container).addView(mImageViews[position % mImageViews.length], 0);
             } catch (Exception e) {
-                //handler something
             }
             return mImageViews[position % mImageViews.length];
         }
@@ -258,4 +248,5 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
             fftList.add(fft1);
         }
     }
+
 }

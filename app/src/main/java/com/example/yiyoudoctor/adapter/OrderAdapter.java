@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
-import com.example.yiyoudoctor.activity.orderActivity;
+import com.example.yiyoudoctor.activity.OrderActivity;
 import com.example.yiyoudoctor.model.Patient;
 
 import java.util.List;
@@ -73,7 +73,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Patient patient = mPatientList.get(position);
-                Intent intent = new Intent(mContext, orderActivity.class);
+                Intent intent = new Intent(mContext, OrderActivity.class);
                 intent.putExtra("patient_data", patient);
                 mContext.startActivity(intent);
             }

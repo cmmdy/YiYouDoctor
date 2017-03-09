@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -16,7 +17,11 @@ import android.widget.Toast;
 
 import com.example.yiyoudoctor.R;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
+
+import static android.R.attr.fragment;
 
 /**
  * BaseActivity
@@ -29,6 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 用来保存所有已打开的Activity
      */
     private static Stack<Activity> listActivity = new Stack<Activity>();
+
 
     /**
      * 标题栏
@@ -89,6 +95,15 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 初始化标题栏
      **/
     protected abstract void initToolbar();
+
+    //布局中Fragment的ID
+    protected abstract int getFragmentContentId();
+
+
+    //获取子fragment
+    public BaseFragment getCurrentFragment(int target){
+        return (BaseFragment) getSupportFragmentManager().findFragmentById(target);
+    }
 
     /**
      * 获得toolbar对象
@@ -267,7 +282,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * Fragment替换(核心为隐藏当前的,显示现在的,用过的将不会destrory与create)
      */
-    public void smartFragmentReplace(int target, Fragment toFragment) {
+    public void smartFragmentReplace(Fragment toFragment) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         // 如有当前在使用的->隐藏当前的
@@ -279,11 +294,30 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (manager.findFragmentByTag(toClassName) != null) {
             transaction.show(toFragment);
         } else {// toFragment还没添加使用过->添加上去
-            transaction.add(target, toFragment, toClassName);
+            transaction.add(getFragmentContentId(), toFragment, toClassName);
         }
         transaction.commit();
         // toFragment更新为当前的
         currentFragment = toFragment;
+    }
+
+    //移除fragment
+    protected void removeFragment() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            finish();
+        }
+    }
+
+    //添加fragment
+    protected void addFragment(BaseFragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(getFragmentContentId(), fragment, fragment.getClass().getSimpleName())
+                    .addToBackStack(fragment.getClass().getSimpleName())
+                    .commitAllowingStateLoss();
+        }
     }
 
     /***********************************************************************/
