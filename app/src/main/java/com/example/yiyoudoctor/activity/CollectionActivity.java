@@ -11,9 +11,7 @@ import android.widget.TextView;
 import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.adapter.collectionAdapter;
-import com.example.yiyoudoctor.fragment.HomeFragment;
 import com.example.yiyoudoctor.model.CollectionText;
-import com.example.yiyoudoctor.model.HFText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +41,7 @@ public class CollectionActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_collection;
+        return R.layout.collection_activity;
     }
 
     @Override

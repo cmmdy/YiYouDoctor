@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <include layout="@layout/toolbar_back" />
 
@@ -18,8 +17,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:text="患者信息" />
+            android:text="患者信息"
+            android:textSize="17sp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginStart="5dp"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -82,8 +84,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:text="患者情况" />
+            android:text="患者情况"
+            android:textSize="17sp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginStart="5dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -91,43 +96,20 @@
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorBlack">
 
-
-        <Button
-            android:id="@+id/button_argee"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="1"
-            android:background="@drawable/title"
-            android:text="同意"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-        <LinearLayout
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.01"
-            android:background="#fff" />
-
-        <Button
-            android:id="@+id/button_refuse"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_weight="1"
-            android:background="@drawable/title"
-            android:text="拒绝"
+            android:text="已同意"
             android:textColor="#fff"
-            android:textSize="18sp" />
-
+            android:gravity="center"
+            android:textSize="20sp"/>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
@@ -138,11 +120,54 @@
         android:textSize="20sp" />
 
     <LinearLayout
+        android:id="@+id/ll3"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/textView"
-        android:layout_marginStart="10sp"
-        android:background="#a9a3a3a3" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView5"
+        android:background="#b9d6d6d6"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="医师诊断反馈"
+            android:textSize="17sp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginStart="5dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/records"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignStart="@+id/textView5"
+        android:layout_below="@+id/ll3"
+        android:layout_margin="5dp"
+        android:text="2222222"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/feedback"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/records"
+        android:background="@drawable/title"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="反馈门诊结果"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:gravity="center"/>
+    </LinearLayout>
 
 
 </RelativeLayout>

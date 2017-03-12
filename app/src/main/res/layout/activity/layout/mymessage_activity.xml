@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar_back" />
+    <include layout="@layout/toolbar_back"
+        android:id="@+id/include5" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -463,6 +464,18 @@
         </RelativeLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:layout_marginEnd="6dp"
+        android:text="去认证"
+        android:textColor="#fff"
+        android:textSize="17sp"
+        android:layout_alignBottom="@+id/include5"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

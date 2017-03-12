@@ -17,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="我是第一个Fragment"
+            android:layout_marginTop="35dp"
+            android:text="     当前暂未有会话 \n点击右上角新建会话"
             android:textSize="20dp" />
     </FrameLayout>
 

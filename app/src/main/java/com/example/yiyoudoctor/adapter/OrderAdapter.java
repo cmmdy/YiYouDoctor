@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.activity.OrderActivity;
+import com.example.yiyoudoctor.activity.RecordsActivity;
 import com.example.yiyoudoctor.model.Patient;
 
 import java.util.List;
@@ -63,7 +64,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.order_listitem, parent, false);
+                .inflate(R.layout.order_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         holder.orderrl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +80,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "您已同意该预约门诊", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, RecordsActivity.class);
+                mContext.startActivity(intent);
             }
         });
         holder.refuse_button.setOnClickListener(new View.OnClickListener() {

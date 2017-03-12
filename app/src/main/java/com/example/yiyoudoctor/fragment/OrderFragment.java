@@ -2,15 +2,12 @@ package com.example.yiyoudoctor.fragment;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.Base.BaseFragment;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.adapter.OrderAdapter;
@@ -19,12 +16,17 @@ import com.example.yiyoudoctor.model.Patient;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by 夏夜晚凤 on 2017/3/2.
  */
 
 public class OrderFragment extends BaseFragment {
 
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
     private String title = "预约";
 
     private List<Patient> patientList = new ArrayList<>();
@@ -34,18 +36,27 @@ public class OrderFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     @Override
-    protected void initView(View view, Bundle savedInstanceState) {
+    protected void initUI() {
+
+    }
+
+    @Override
+    protected void initData() {
         initPatients();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         OrderAdapter adapter = new OrderAdapter(patientList, getContext());
         recyclerView.setAdapter(adapter);
     }
 
-    public String getTitle() {
-        return title;
+    @Override
+    protected void initListener() {
+
     }
 
     @Override

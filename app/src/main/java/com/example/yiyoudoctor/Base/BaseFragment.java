@@ -15,11 +15,8 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
 
-    private String title;
 
     protected BaseActivity mActivity;
-
-    protected abstract void initView(View view, Bundle savedInstanceState);
 
     //获取布局文件ID
     protected abstract int getLayoutId();
@@ -35,10 +32,6 @@ public abstract class BaseFragment extends Fragment {
         this.mActivity = (BaseActivity) activity;
     }
 
-    //获取当前fragment的title
-    public String getTitle() {
-        return title;
-    }
 
     //添加fragment
     protected void addFragment(BaseFragment fragment) {
@@ -55,7 +48,29 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(), container, false);
-        initView(view, savedInstanceState);
+        //绑定ButterKnife
+        ButterKnife.bind(this, view);
+        // 初始化ui
+        initUI();
+        // 初始化数据
+        initData();
+        // 事件监听
+        initListener();
         return view;
     }
+
+    /**
+     * 初始化ui
+     **/
+    protected abstract void initUI();
+
+    /**
+     * 初始化数据
+     **/
+    protected abstract void initData();
+
+    /**
+     * 初始化监听
+     **/
+    protected abstract void initListener();
 }

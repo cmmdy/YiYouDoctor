@@ -81,7 +81,7 @@ public class OrderActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(OrderActivity.this, "您已同意该预约门诊", Toast.LENGTH_SHORT).show();
-                finish();
+                openActivity(RecordsActivity.class);
             }
         });
         refuse_button.setOnClickListener(new View.OnClickListener() {

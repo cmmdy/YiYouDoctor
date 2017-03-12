@@ -3,7 +3,8 @@ package com.example.yiyoudoctor.activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.widget.ImageButton;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -13,13 +14,14 @@ import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.fragment.HomeFragment;
 import com.example.yiyoudoctor.fragment.MyFragment;
 import com.example.yiyoudoctor.fragment.OrderFragment;
-import com.example.yiyoudoctor.fragment.TestFragment;
+import com.example.yiyoudoctor.fragment.TouchFragment;
 import com.example.yiyoudoctor.other.MyBitmap;
 import com.example.yiyoudoctor.other.getHW;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
 public class HomeActivity extends BaseActivity {
@@ -29,13 +31,15 @@ public class HomeActivity extends BaseActivity {
     TextView title;
     @BindView(R.id.bottom_bar)
     BottomNavigationBar mBottomNavigationBar;
+    @BindView(R.id.im)
+    ImageView im;
 
     private ArrayList<Fragment> fragments;
     private static Drawable drawable;
 
     private Fragment fragment1 = new HomeFragment();
     private Fragment fragment2 = new OrderFragment();
-    private Fragment fragment3 = new TestFragment();
+    private Fragment fragment3 = new TouchFragment();
     private Fragment fragment4 = new MyFragment();
 
     @Override
@@ -75,15 +79,25 @@ public class HomeActivity extends BaseActivity {
                 switch (position) {
                     case 0:
                         setTitle("首页");
+                        im.setVisibility(View.VISIBLE);
+                        im.setImageResource(R.drawable.message);
+                        im.setClickable(true);
                         break;
                     case 1:
                         setTitle("预约");
+                        im.setVisibility(View.INVISIBLE);
+                        im.setClickable(false);
                         break;
                     case 2:
                         setTitle("联系人");
+                        im.setImageResource(android.R.drawable.ic_menu_add);
+                        im.setVisibility(View.VISIBLE);
+                        im.setClickable(false);
                         break;
                     case 3:
                         setTitle("我的");
+                        im.setVisibility(View.INVISIBLE);
+                        im.setClickable(false);
                         break;
                 }
                 smartFragmentReplace(fragments.get(position));
@@ -132,6 +146,8 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void setDefaultFragment() {
+        im.setImageResource(R.drawable.message);
+        myClick();
         smartFragmentReplace(fragment1);
     }
 
@@ -146,6 +162,15 @@ public class HomeActivity extends BaseActivity {
 
     private void setTitle(String title1) {
         title.setText(title1);
+    }
+
+    private void myClick(){
+        im.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity(NotificationActivity.class);
+            }
+        });
     }
 
 }

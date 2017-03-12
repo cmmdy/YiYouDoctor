@@ -12,11 +12,10 @@ import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MymessageActivity extends BaseActivity {
-    @BindView(R.id.backiv)
-    ImageView backiv;
     @BindView(R.id.backtv)
     TextView backtv;
     @BindView(R.id.backll)
@@ -78,34 +77,6 @@ public class MymessageActivity extends BaseActivity {
 
     @Override
     protected void initUI() {
-
-        imagerl = (RelativeLayout) findViewById(R.id.imageLayout);
-        civ1 = (CircleImageView) findViewById(R.id.civ1);
-
-        nametv = (TextView) findViewById(R.id.name_tv);
-        phonetv = (TextView) findViewById(R.id.phone_tv);
-        sextv = (TextView) findViewById(R.id.sex_tv);
-        agetv = (TextView) findViewById(R.id.age_tv);
-        astv = (TextView) findViewById(R.id.as_tv);
-        altv = (TextView) findViewById(R.id.al_tv);
-
-        civ2 = (CircleImageView) findViewById(R.id.civ2);
-        persontv = (TextView) findViewById(R.id.person_tv);
-
-        messageiv = (ImageView) findViewById(R.id.messageiv);
-        mntv = (TextView) findViewById(R.id.messagename_tv);
-        mdtv1 = (TextView) findViewById(R.id.messagedoctor_tv1);
-        mstv = (TextView) findViewById(R.id.messagescore_tv);
-        phonell = (LinearLayout) findViewById(R.id.phonell);
-        mptv = (TextView) findViewById(R.id.messagephone_tv);
-        addressll = (LinearLayout) findViewById(R.id.addressll);
-        matv = (TextView) findViewById(R.id.adress_tv);
-        civ3 = (CircleImageView) findViewById(R.id.civ3);
-        mdtv2 = (TextView) findViewById(R.id.messagedoctor_tv2);
-
-        backll = (LinearLayout) findViewById(R.id.backll);
-        backtv = generateFindViewById(R.id.backtv);
-        title = generateFindViewById(R.id.title);
     }
 
     @Override
@@ -138,12 +109,6 @@ public class MymessageActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-        backll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     @Override
@@ -157,4 +122,15 @@ public class MymessageActivity extends BaseActivity {
         return 0;
     }
 
+    @OnClick({R.id.backll, R.id.textView7})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.backll:
+                finish();
+                break;
+            case R.id.textView7:
+                openActivity(Authentication.class);
+                break;
+        }
+    }
 }

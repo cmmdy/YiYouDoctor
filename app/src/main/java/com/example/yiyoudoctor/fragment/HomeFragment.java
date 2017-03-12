@@ -1,8 +1,9 @@
 package com.example.yiyoudoctor.fragment;
 
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,8 @@ import android.widget.ListView;
 
 import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.Base.BaseFragment;
-import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.activity.TextActivity;
 import com.example.yiyoudoctor.adapter.HFTextAdapter;
 import com.example.yiyoudoctor.model.HFText;
@@ -24,10 +25,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
 
-    private String title = "首页";
+public class HomeFragment extends BaseFragment{
+
+    @BindView(R.id.fftListView)
+    ListView listView;
 
     private static List<HFText> fftList = new ArrayList<>();
 
@@ -50,7 +55,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     /**
      * 图片资源id
      */
-    private int[] imgIdArray;
+    private int[] imgIdArray = new int[]{R.drawable.viewpager1, R.drawable.viewpager2, R.drawable.viewpager3, R.drawable.viewpager4,};
 
     private boolean isLooper;
     private boolean ifStop = false;
@@ -63,24 +68,22 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     }
 
     @Override
-    protected void initView(View view, Bundle savedInstanceState) {
-        viewheadlv = getLayoutInflater(null).inflate(R.layout.home_listhead, null, false);
+    protected int getLayoutId() {
+        return R.layout.home_fragment;
+    }
+
+    @Override
+    protected void initUI() {
+        viewheadlv = getLayoutInflater(null).inflate(R.layout.home_head, null, false);
 
         //初始化布局
         group = (ViewGroup) viewheadlv.findViewById(R.id.viewGroup);
         viewPager = (ViewPager) viewheadlv.findViewById(R.id.viewPager);
-        //载入图片资源ID
-        imgIdArray = new int[]{R.drawable.viewpager1, R.drawable.viewpager2, R.drawable.viewpager3, R.drawable.viewpager4,};
-        addtips();
-        addimage();
-
-        //设置Adapter
-        viewPager.setAdapter(new MyAdapter());
-        //设置监听，主要是设置点点的背景
-        viewPager.setOnPageChangeListener(this);
-        //设置ViewPager的默认项, 设置为长度的100倍，这样子开始就能往左滑动
-        viewPager.setCurrentItem((mImageViews.length) * 100);
-
+        FrameLayout frameLayout = (FrameLayout) viewheadlv.findViewById(R.id.headFL);
+        FrameLayout point_layout = (FrameLayout) viewheadlv.findViewById(R.id.point_layout);
+        //动态设置高度
+        frameLayout.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 3.5);
+        point_layout.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 35);
 
         new Thread(new Runnable() {
             @Override
@@ -110,17 +113,29 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             }
         }).start();
 
+    }
+
+    @Override
+    protected void initData() {
+        //载入图片资源ID
+        addtips();
+        addimage();
+
         HFTextAdapter FFTAdapter = new HFTextAdapter
-                (getActivity(), R.layout.home_listitem, fftList);
-        ListView listView = (ListView) view.findViewById(R.id.fftListView);
+                (getActivity(), R.layout.home_item, fftList);
+
         listView.addHeaderView(viewheadlv);
         initffts();
         listView.setAdapter(FFTAdapter);
+    }
 
-        FrameLayout frameLayout = (FrameLayout) viewheadlv.findViewById(R.id.headFL);
-        frameLayout.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 3.5);
-        FrameLayout point_layout = (FrameLayout) viewheadlv.findViewById(R.id.point_layout);
-        point_layout.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 35);
+    @Override
+    protected void initListener() {
+
+        //设置Adapter
+        viewPager.setAdapter(new MyAdapter());
+        //设置ViewPager的默认项, 设置为长度的100倍，这样子开始就能往左滑动
+        viewPager.setCurrentItem((mImageViews.length) * 100);
 
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -144,15 +159,22 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             }
         });
 
-    }
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.home_fragment;
-    }
+            }
 
-    public String getTitle() {
-        return title;
+            @Override
+            public void onPageSelected(int position) {
+                setImageBackground(position % mImageViews.length);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void addtips() {
@@ -186,7 +208,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         }
     }
 
-    public class MyAdapter extends PagerAdapter {
+    private class MyAdapter extends PagerAdapter {
 
         @Override
         public int getCount() {
@@ -211,21 +233,6 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             return mImageViews[position % mImageViews.length];
         }
 
-
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int arg0) {
-        setImageBackground(arg0 % mImageViews.length);
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
 
     }
 

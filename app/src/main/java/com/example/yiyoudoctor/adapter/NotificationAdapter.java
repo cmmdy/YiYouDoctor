@@ -1,5 +1,6 @@
 package com.example.yiyoudoctor.adapter;
 
+import android.app.Notification;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextPaint;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.activity.HomeActivity;
 import com.example.yiyoudoctor.model.HFText;
+import com.example.yiyoudoctor.model.MyNotifaction;
 
 import java.util.List;
 
@@ -26,13 +28,13 @@ import butterknife.ButterKnife;
  * Created by 夏夜晚凤 on 2017/3/2.
  */
 
-public class HFTextAdapter extends ArrayAdapter<HFText> {
+public class NotificationAdapter extends ArrayAdapter<MyNotifaction> {
 
     private Context mContext;
 
     private int resourceId;
 
-    public HFTextAdapter(Context context, int FFTResourceId, List<HFText> list) {
+    public NotificationAdapter(Context context, int FFTResourceId, List<MyNotifaction> list) {
         super(context, FFTResourceId, list);
         resourceId = FFTResourceId;
         mContext = context;
@@ -41,7 +43,7 @@ public class HFTextAdapter extends ArrayAdapter<HFText> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        HFText fft = getItem(position);
+        MyNotifaction myNotifaction = getItem(position);
         View view;
         ViewHolder viewHolder;
         if (convertView == null) {
@@ -51,30 +53,26 @@ public class HFTextAdapter extends ArrayAdapter<HFText> {
             RelativeLayout rlListView = (RelativeLayout) view.findViewById(R.id.rlListView);
             rlListView.getLayoutParams().height = (int) (HomeActivity.gethw.getHEIGHT() / 6);
             viewHolder = new ViewHolder(view);
-            viewHolder.fftImage.getLayoutParams().width = (int) (HomeActivity.gethw.getHEIGHT() / 6);
-            TextPaint tp = viewHolder.fftTitleText.getPaint();
+            TextPaint tp = viewHolder.title.getPaint();
             tp.setFakeBoldText(true);
             view.setTag(viewHolder);
         } else {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
-        Glide.with(mContext).load(fft.getImageId()).into(viewHolder.fftImage);
-        viewHolder.fftTitleText.setText(fft.getTextTitle());
-        viewHolder.fftIntroductionText.setText(fft.getTextIntroduction());
-        viewHolder.fftTime.setText(fft.getTime());
+        viewHolder.title.setText(myNotifaction.getTitle());
+        viewHolder.text.setText(myNotifaction.getText());
+        viewHolder.time.setText(myNotifaction.getTime());
         return view;
     }
 
     static class ViewHolder {
-        @BindView(R.id.first_fragment_text_image)
-        ImageView fftImage;
-        @BindView(R.id.first_fragment_text_title)
-        TextView fftTitleText;
-        @BindView(R.id.first_fragment_text_introduction)
-        TextView fftIntroductionText;
-        @BindView(R.id.first_fragment_time)
-        TextView fftTime;
+        @BindView(R.id.title)
+        TextView title;
+        @BindView(R.id.text)
+        TextView text;
+        @BindView(R.id.time)
+        TextView time;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
