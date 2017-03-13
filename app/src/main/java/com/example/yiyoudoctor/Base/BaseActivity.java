@@ -242,6 +242,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 关闭指定(前台、后台)Activity,注意：请已BaseActivity为父类
+     */
+    protected static void finishSome(int len) {
+        for (int i = 0; i < len; i++) {
+            Activity activity = listActivity.pop();
+            activity.finish();
+        }
+    }
+    /**
      * 关闭所有(前台、后台)Activity,注意：请已BaseActivity为父类
      */
     protected static void finishAll() {
