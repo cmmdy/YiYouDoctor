@@ -13,8 +13,6 @@ import com.example.yiyoudoctor.R;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static com.example.yiyoudoctor.R.id.textView11;
 
 public class SignSecondActivity extends BaseActivity {
 

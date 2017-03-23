@@ -1,6 +1,7 @@
 package com.example.yiyoudoctor.activity;
 
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -11,17 +12,19 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
+import com.example.yiyoudoctor.adapter.ConversationListAdapterEx;
 import com.example.yiyoudoctor.fragment.HomeFragment;
 import com.example.yiyoudoctor.fragment.MyFragment;
 import com.example.yiyoudoctor.fragment.OrderFragment;
-import com.example.yiyoudoctor.fragment.TouchFragment;
-import com.example.yiyoudoctor.other.MyBitmap;
-import com.example.yiyoudoctor.other.getHW;
+import com.example.yiyoudoctor.util.MyBitmap;
+import com.example.yiyoudoctor.util.getHW;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+import io.rong.imkit.RongContext;
+import io.rong.imkit.fragment.ConversationListFragment;
+import io.rong.imlib.model.Conversation;
 
 
 public class HomeActivity extends BaseActivity {
@@ -37,10 +40,13 @@ public class HomeActivity extends BaseActivity {
     private ArrayList<Fragment> fragments;
     private static Drawable drawable;
 
+    private ConversationListFragment mConversationListFragment = null;
     private Fragment fragment1 = new HomeFragment();
     private Fragment fragment2 = new OrderFragment();
-    private Fragment fragment3 = new TouchFragment();
+    private Fragment fragment3;
     private Fragment fragment4 = new MyFragment();
+    private boolean isDebug;
+    private Conversation.ConversationType[] mConversationsTypes = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,8 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void initUI() {
+        isDebug = getSharedPreferences("config", MODE_PRIVATE).getBoolean("isDebug", false);
+        fragment3 = initConversationList();
         assignViews();
     }
 
@@ -173,6 +181,52 @@ public class HomeActivity extends BaseActivity {
         });
     }
 
+    private Fragment initConversationList() {
+        if (mConversationListFragment == null) {
+            ConversationListFragment listFragment = new ConversationListFragment();
+            listFragment.setAdapter(new ConversationListAdapterEx(RongContext.getInstance()));
+            Uri uri;
+            if (isDebug) {
+                uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
+                        .appendPath("conversationlist")
+                        .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "true") //设置私聊会话是否聚合显示
+                        .appendQueryParameter(Conversation.ConversationType.GROUP.getName(), "true")//群组
+                        .appendQueryParameter(Conversation.ConversationType.PUBLIC_SERVICE.getName(), "false")//公共服务号
+                        .appendQueryParameter(Conversation.ConversationType.APP_PUBLIC_SERVICE.getName(), "false")//订阅号
+                        .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "true")//系统
+                        .appendQueryParameter(Conversation.ConversationType.DISCUSSION.getName(), "true")
+                        .build();
+                mConversationsTypes = new Conversation.ConversationType[]{Conversation.ConversationType.PRIVATE,
+                        Conversation.ConversationType.GROUP,
+                        Conversation.ConversationType.PUBLIC_SERVICE,
+                        Conversation.ConversationType.APP_PUBLIC_SERVICE,
+                        Conversation.ConversationType.SYSTEM,
+                        Conversation.ConversationType.DISCUSSION
+                };
+
+            } else {
+                uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
+                        .appendPath("conversationlist")
+                        .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false") //设置私聊会话是否聚合显示
+                        .appendQueryParameter(Conversation.ConversationType.GROUP.getName(), "false")//群组
+                        .appendQueryParameter(Conversation.ConversationType.PUBLIC_SERVICE.getName(), "false")//公共服务号
+                        .appendQueryParameter(Conversation.ConversationType.APP_PUBLIC_SERVICE.getName(), "false")//订阅号
+                        .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "true")//系统
+                        .build();
+                mConversationsTypes = new Conversation.ConversationType[]{Conversation.ConversationType.PRIVATE,
+                        Conversation.ConversationType.GROUP,
+                        Conversation.ConversationType.PUBLIC_SERVICE,
+                        Conversation.ConversationType.APP_PUBLIC_SERVICE,
+                        Conversation.ConversationType.SYSTEM
+                };
+            }
+            listFragment.setUri(uri);
+            mConversationListFragment = listFragment;
+            return listFragment;
+        } else {
+            return mConversationListFragment;
+        }
+    }
 }
 
 
