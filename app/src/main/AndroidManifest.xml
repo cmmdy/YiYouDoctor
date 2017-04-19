@@ -38,17 +38,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".ui.activity.HomeActivity"
             android:label="" />
         <activity
-            android:name=".activity.MymessageActivity"
+            android:name=".ui.activity.MymessageActivity"
             android:label="" />
         <activity
-            android:name=".activity.OrderActivity"
+            android:name=".ui.activity.OrderActivity"
             android:label="" />
-        <activity android:name=".activity.TextActivity" />
-        <activity android:name=".activity.CollectionActivity" />
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".ui.activity.TextActivity" />
+        <activity android:name=".ui.activity.CollectionActivity" />
+        <activity android:name=".ui.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,23 +56,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.RecordsActivity"
+            android:name=".ui.activity.RecordsActivity"
             android:label="" />
-        <activity android:name=".activity.OrderSetting" />
+        <activity android:name=".ui.activity.OrderSetting" />
         <activity
-            android:name=".activity.FeedbackActivity"
+            android:name=".ui.activity.FeedbackActivity"
             android:label="" />
-        <activity android:name=".activity.Authentication" />
-        <activity android:name=".activity.NotificationActivity" />
-        <activity android:name=".activity.PublishArticle" />
-        <activity android:name=".activity.MailList" />
-        <activity android:name=".activity.SignFirstActivity" />
-        <activity android:name=".activity.SignSecondActivity" />
-        <activity android:name=".activity.SignThirdActivity"></activity>
+        <activity android:name=".ui.activity.Authentication" />
+        <activity android:name=".ui.activity.NotificationActivity" />
+        <activity android:name=".ui.activity.PublishArticle" />
+        <activity android:name=".ui.activity.MailList" />
+        <activity android:name=".ui.activity.SignFirstActivity" />
+        <activity android:name=".ui.activity.SignSecondActivity" />
+        <activity android:name=".ui.activity.SignThirdActivity"></activity>
 
         <!--会话列表-->
         <activity
-            android:name="com.example.yiyoudoctor.activity.ConversationListActivity"
+            android:name="com.example.yiyoudoctor.ui.activity.ConversationListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
@@ -89,7 +89,7 @@
 
         <!--会话页面-->
         <activity
-            android:name="com.example.yiyoudoctor.activity.ConversationActivity"
+            android:name="com.example.yiyoudoctor.ui.activity.ConversationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:label="">

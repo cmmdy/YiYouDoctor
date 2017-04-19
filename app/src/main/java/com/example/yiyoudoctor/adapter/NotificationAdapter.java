@@ -1,6 +1,5 @@
 package com.example.yiyoudoctor.adapter;
 
-import android.app.Notification;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextPaint;
@@ -8,15 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.R;
-import com.example.yiyoudoctor.activity.HomeActivity;
-import com.example.yiyoudoctor.model.HFText;
-import com.example.yiyoudoctor.model.MyNotifaction;
+import com.example.yiyoudoctor.ui.activity.HomeActivity;
+import com.example.yiyoudoctor.mvp.model.MyNotifaction;
 
 import java.util.List;
 

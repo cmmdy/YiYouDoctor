@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#07b3d7"
-    tools:context="com.example.yiyoudoctor.activity.LoginActivity">
+    tools:context="com.example.yiyoudoctor.ui.activity.LoginActivity">
 
     <include
         android:id="@+id/include8"

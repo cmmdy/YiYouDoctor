@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yiyoudoctor.activity.CollectionActivity">
+    tools:context="com.example.yiyoudoctor.ui.activity.CollectionActivity">
 
     <include layout="@layout/toolbar_back"
         android:id="@+id/include2" />

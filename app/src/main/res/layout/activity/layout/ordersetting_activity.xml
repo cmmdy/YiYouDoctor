@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yiyoudoctor.activity.OrderSetting"
+    tools:context="com.example.yiyoudoctor.ui.activity.OrderSetting"
     android:background="#24d7d7d7">
 
     <include layout="@layout/toolbar_back"
