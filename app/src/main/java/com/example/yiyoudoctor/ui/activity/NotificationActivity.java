@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.adapter.NotificationAdapter;
-import com.example.yiyoudoctor.mvp.model.MyNotifaction;
+import com.example.yiyoudoctor.mvp.MyNotifaction;
 
 import java.util.ArrayList;
 import java.util.Calendar;

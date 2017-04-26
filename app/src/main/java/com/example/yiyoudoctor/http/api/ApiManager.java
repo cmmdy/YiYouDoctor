@@ -1,4 +1,4 @@
-package com.example.yiyoudoctor.api;
+package com.example.yiyoudoctor.http.api;
 
 /**
  * 常量定义设置类，不允许放其他数据

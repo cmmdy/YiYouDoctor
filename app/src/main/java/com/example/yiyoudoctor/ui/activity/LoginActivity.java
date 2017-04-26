@@ -9,17 +9,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.yiyoudoctor.Base.App;
-import com.example.yiyoudoctor.Base.BaseActivity;
-import com.example.yiyoudoctor.Base.DemoContext;
 import com.example.yiyoudoctor.R;
-import com.example.yiyoudoctor.util.my.NetUtils;
+import com.example.yiyoudoctor.mvp.contract.LoginContract;
+import com.example.yiyoudoctor.mvp.dagger2.component.DaggerLoginComponent;
+import com.example.yiyoudoctor.mvp.dagger2.component.LoginComponent;
+import com.example.yiyoudoctor.mvp.dagger2.module.PresenterModule;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +24,7 @@ import butterknife.OnClick;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends LoginContract.View{
 
     @BindView(R.id.title)
     TextView title;
@@ -35,6 +32,10 @@ public class LoginActivity extends BaseActivity {
     EditText accountEdittext;
     @BindView(R.id.pwdEdittext)
     EditText pwdEdittext;
+
+    @Inject
+    public LoginContract.Presenter loginPresenter;
+
 
     /**
      * token 的主要作用是身份授权和安全，因此不能通过客户端直接访问融云服务器获取 token，
@@ -44,11 +45,19 @@ public class LoginActivity extends BaseActivity {
     private String account;
     private String password;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         ButterKnife.bind(this);
+        LoginComponent loginComponent = DaggerLoginComponent
+                .builder()
+                .presenterModule(new PresenterModule(this))
+                .build();
+        loginComponent.inject(this);
+
     }
 
     @Override
@@ -86,7 +95,7 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_button:
-                login();
+                loginPresenter.login();
                 break;
             case R.id.forget:
                 Bundle bundle = new Bundle();
@@ -99,118 +108,5 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 用户登录，用户登录成功，获得 cookie，将cookie 保存
-     */
-    private void login() {
 
-        new AsyncTask<Void, Void, String>() {
-
-            @Override
-            protected String doInBackground(Void... params) {
-
-                Map<String, String> requestParameter = new HashMap<String, String>();
-
-                requestParameter.put("email", "yang115@qq.com");
-                requestParameter.put("password", "123456");
-
-                String result = NetUtils.sendPostRequest("email_login", requestParameter);
-                return result;
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-
-                getToken();
-            }
-        }.execute();
-    }
-
-    /**
-     * 获得token
-     */
-    private void getToken() {
-
-        new AsyncTask<Void, Void, String>() {
-
-            @Override
-            protected String doInBackground(Void... params) {
-
-                String result = NetUtils.sendGetRequest("token");
-                return result;
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-
-                try {
-                    if (result != null) {
-                        JSONObject object = new JSONObject(result);
-                        JSONObject jobj = object.getJSONObject("result");
-
-                        if (object.getInt("code") == 200) {
-                            token = jobj.getString("token");
-                            connect(token);
-
-                            SharedPreferences.Editor edit = DemoContext.getInstance().getSharedPreferences().edit();
-                            edit.putString("DEMO_TOKEN", token);
-                            edit.apply();
-
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.execute();
-    }
-
-    /**
-     * 建立与融云服务器的连接
-     *
-     * @param token
-     */
-    private void connect(final String token) {
-
-        if (getApplicationInfo().packageName.equals(App.getCurProcessName(getApplicationContext()))) {
-
-            /**
-             * IMKit SDK调用第二步,建立与服务器的连接
-             */
-            RongIM.connect("VqGgB3fFDbso3VxrfOeuSc92zQ3Ar7D+FvdaUdbFdKChHmQx/kgPxw1xg++ZCCnIZKK6aMdPkquoCasGlAV3fA==", new RongIMClient.ConnectCallback() {
-
-                /**
-                 * Token 错误，在线上环境下主要是因为 Token 已经过期，您需要向 App Server 重新请求一个新的 Token
-                 */
-                @Override
-                public void onTokenIncorrect() {
-
-                    Log.e("LoginActivity", "--onTokenIncorrect");
-                }
-
-                /**
-                 * 连接融云成功
-                 * @param userid 当前 token
-                 */
-                @Override
-                public void onSuccess(String userid) {
-
-                    Log.e("LoginActivity", "--onSuccess" + userid);
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                    finish();
-                }
-
-                /**
-                 * 连接融云失败
-                 * @param errorCode 错误码，可到官网 查看错误码对应的注释
-                 *                  http://www.rongcloud.cn/docs/android.html#常见错误码
-                 */
-                @Override
-                public void onError(RongIMClient.ErrorCode errorCode) {
-
-                    Log.e("LoginActivity", "--onError" + errorCode);
-                }
-            });
-        }
-    }
 }

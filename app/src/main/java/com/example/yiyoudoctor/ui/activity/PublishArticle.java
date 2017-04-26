@@ -14,7 +14,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.adapter.HFTextAdapter;
-import com.example.yiyoudoctor.mvp.model.HFText;
+import com.example.yiyoudoctor.mvp.HFText;
 
 import java.util.ArrayList;
 import java.util.Calendar;

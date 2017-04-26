@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.yiyoudoctor.Base.BaseFragment;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.adapter.OrderAdapter;
-import com.example.yiyoudoctor.mvp.model.Patient;
+import com.example.yiyoudoctor.mvp.Patient;
 
 import java.util.ArrayList;
 import java.util.List;

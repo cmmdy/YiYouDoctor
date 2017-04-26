@@ -1,4 +1,4 @@
-package com.example.yiyoudoctor.mvp.model;
+package com.example.yiyoudoctor.mvp;
 
 /**
  * Created by 夏夜晚凤 on 2017/3/5.

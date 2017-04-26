@@ -20,7 +20,7 @@ import com.example.yiyoudoctor.ui.activity.MymessageActivity;
 import com.example.yiyoudoctor.ui.activity.OrderSetting;
 import com.example.yiyoudoctor.ui.activity.PublishArticle;
 import com.example.yiyoudoctor.adapter.MyAdapter;
-import com.example.yiyoudoctor.mvp.model.MyMessage;
+import com.example.yiyoudoctor.mvp.MyMessage;
 
 import java.util.ArrayList;
 import java.util.List;

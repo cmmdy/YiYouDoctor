@@ -1,4 +1,4 @@
-package com.example.yiyoudoctor.mvp.model;
+package com.example.yiyoudoctor.mvp;
 
 import android.os.Parcel;
 import android.os.Parcelable;

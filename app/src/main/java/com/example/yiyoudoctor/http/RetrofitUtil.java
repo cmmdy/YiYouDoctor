@@ -1,6 +1,6 @@
 package com.example.yiyoudoctor.http;
 
-import com.example.yiyoudoctor.api.ApiManager;
+import com.example.yiyoudoctor.http.api.ApiManager;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

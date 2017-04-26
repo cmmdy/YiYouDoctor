@@ -18,7 +18,7 @@ import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.ui.activity.HomeActivity;
 import com.example.yiyoudoctor.ui.activity.TextActivity;
 import com.example.yiyoudoctor.adapter.HFTextAdapter;
-import com.example.yiyoudoctor.mvp.model.HFText;
+import com.example.yiyoudoctor.mvp.HFText;
 
 import java.util.ArrayList;
 import java.util.Calendar;

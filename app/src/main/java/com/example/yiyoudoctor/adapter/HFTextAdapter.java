@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.ui.activity.HomeActivity;
-import com.example.yiyoudoctor.mvp.model.HFText;
+import com.example.yiyoudoctor.mvp.HFText;
 
 import java.util.List;
 

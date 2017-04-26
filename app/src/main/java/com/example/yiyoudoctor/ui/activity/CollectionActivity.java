@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.adapter.collectionAdapter;
-import com.example.yiyoudoctor.mvp.model.CollectionText;
+import com.example.yiyoudoctor.mvp.CollectionText;
 
 import java.util.ArrayList;
 import java.util.List;

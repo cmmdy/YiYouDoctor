@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.ui.activity.HomeActivity;
-import com.example.yiyoudoctor.mvp.model.MyNotifaction;
+import com.example.yiyoudoctor.mvp.MyNotifaction;
 
 import java.util.List;
 

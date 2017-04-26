@@ -14,7 +14,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.adapter.ContactAdapter;
-import com.example.yiyoudoctor.mvp.model.Contact;
+import com.example.yiyoudoctor.mvp.Contact;
 
 import java.util.ArrayList;
 import java.util.List;

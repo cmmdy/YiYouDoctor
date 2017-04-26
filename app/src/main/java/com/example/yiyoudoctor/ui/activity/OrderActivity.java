@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.yiyoudoctor.Base.BaseActivity;
 import com.example.yiyoudoctor.R;
-import com.example.yiyoudoctor.mvp.model.Patient;
+import com.example.yiyoudoctor.mvp.Patient;
 
 public class OrderActivity extends BaseActivity {
 

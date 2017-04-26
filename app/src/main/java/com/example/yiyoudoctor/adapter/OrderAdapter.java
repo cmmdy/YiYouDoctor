@@ -17,7 +17,7 @@ import com.example.yiyoudoctor.R;
 import com.example.yiyoudoctor.ui.activity.HomeActivity;
 import com.example.yiyoudoctor.ui.activity.OrderActivity;
 import com.example.yiyoudoctor.ui.activity.RecordsActivity;
-import com.example.yiyoudoctor.mvp.model.Patient;
+import com.example.yiyoudoctor.mvp.Patient;
 
 import java.util.List;
 

@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.yiyoudoctor.R;
-import com.example.yiyoudoctor.mvp.model.Contact;
+import com.example.yiyoudoctor.mvp.Contact;
 
 import java.util.List;
 
